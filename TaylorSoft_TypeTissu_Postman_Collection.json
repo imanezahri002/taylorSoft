@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "taylorsoft-typetissu-collection",
+		"name": "TaylorSoft TypeTissu CRUD API",
+		"description": "Collection pour tester le CRUD des types de tissu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TypeTissu CRUD",
+			"item": [
+				{
+					"name": "Create TypeTissu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Coton\",\n    \"description\": \"Tissu en coton naturel, doux et respirant\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/type-tissu",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"type-tissu"
+							]
+						},
+						"description": "Créer un nouveau type de tissu (ADMIN ou FOURNISSEUR requis)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create TypeTissu - Soie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Soie\",\n    \"description\": \"Tissu de soie luxueux et brillant\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/type-tissu",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"type-tissu"
+							]
+						},
+						"description": "Créer un type de tissu en soie"
+					},
+					"response": []
+				},
+				{
+					"name": "Create TypeTissu - Lin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Lin\",\n    \"description\": \"Tissu en lin naturel, frais et résistant\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/type-tissu",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"type-tissu"
+							]
+						},
+						"description": "Créer un type de tissu en lin"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All TypeTissus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/type-tissu",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"type-tissu"
+							]
+						},
+						"description": "Récupérer tous les types de tissu (accessible à tous)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get TypeTissu By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/type-tissu/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"type-tissu",
+								"1"
+							]
+						},
+						"description": "Récupérer un type de tissu par ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update TypeTissu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Coton Bio\",\n    \"description\": \"Tissu en coton biologique, écologique et doux\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/type-tissu/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"type-tissu",
+								"1"
+							]
+						},
+						"description": "Mettre à jour un type de tissu (ADMIN ou FOURNISSEUR requis)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete TypeTissu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/type-tissu/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"type-tissu",
+								"1"
+							]
+						},
+						"description": "Supprimer un type de tissu (ADMIN uniquement)"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
+
