@@ -1,0 +1,152 @@
+{
+  "info": {
+    "name": "TaylorSoft_Mesure_API",
+    "description": "Collection pour tester les endpoints de l'API Mesure",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Créer une mesure",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "description": "Token JWT d'authentification"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"clientId\": 1,\n  \"tourCou\": 38.5,\n  \"poitrine\": 95.0,\n  \"taille\": 85.0,\n  \"manche\": 60.0,\n  \"longueurDos\": 45.0,\n  \"jambe\": 105.0,\n  \"epaule\": 42.0,\n  \"bras\": 32.0\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/mesures",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "mesures"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Récupérer toutes les mesures",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "description": "Token JWT d'authentification"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/mesures",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "mesures"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Récupérer une mesure par ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "description": "Token JWT d'authentification"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/mesures/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "mesures", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Récupérer mesure par ID client",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "description": "Token JWT d'authentification"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/mesures/client/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "mesures", "client", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Mettre à jour une mesure",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "description": "Token JWT d'authentification"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"clientId\": 1,\n  \"tourCou\": 39.0,\n  \"poitrine\": 96.0,\n  \"taille\": 86.0,\n  \"manche\": 61.0,\n  \"longueurDos\": 46.0,\n  \"jambe\": 106.0,\n  \"epaule\": 43.0,\n  \"bras\": 33.0\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/mesures/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "mesures", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Supprimer une mesure",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "description": "Token JWT d'authentification"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/mesures/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "mesures", "1"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
+

@@ -44,6 +44,7 @@ public class SecurityConfig {
                                 "/api/type-tissu/**",
                                 "/api/couleur/**",
                                 "/api/type-echantillon/**",
+                                "/api/mesures/**",
                                 "/error"
                         ).permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
