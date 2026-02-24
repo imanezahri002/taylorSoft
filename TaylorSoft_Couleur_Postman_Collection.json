@@ -1,0 +1,307 @@
+{
+	"info": {
+		"_postman_id": "taylorsoft-couleur-collection",
+		"name": "TaylorSoft Couleur CRUD API",
+		"description": "Collection pour tester le CRUD des couleurs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Couleur CRUD",
+			"item": [
+				{
+					"name": "Create Couleur - Rouge",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Rouge\",\n    \"codeHex\": \"#FF0000\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/couleur",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur"
+							]
+						},
+						"description": "Créer une couleur rouge"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Couleur - Bleu",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Bleu\",\n    \"codeHex\": \"#0000FF\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/couleur",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur"
+							]
+						},
+						"description": "Créer une couleur bleue"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Couleur - Vert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Vert\",\n    \"codeHex\": \"#00FF00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/couleur",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur"
+							]
+						},
+						"description": "Créer une couleur verte"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Couleur - Noir",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Noir\",\n    \"codeHex\": \"#000000\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/couleur",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur"
+							]
+						},
+						"description": "Créer une couleur noire"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Couleur - Blanc",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Blanc\",\n    \"codeHex\": \"#FFFFFF\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/couleur",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur"
+							]
+						},
+						"description": "Créer une couleur blanche"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Couleur - Rose",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Rose\",\n    \"codeHex\": \"#FFC0CB\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/couleur",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur"
+							]
+						},
+						"description": "Créer une couleur rose"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Couleurs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/couleur",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur"
+							]
+						},
+						"description": "Récupérer toutes les couleurs"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Couleur By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/couleur/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur",
+								"1"
+							]
+						},
+						"description": "Récupérer une couleur par ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Couleur",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Rouge Foncé\",\n    \"codeHex\": \"#8B0000\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/couleur/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur",
+								"1"
+							]
+						},
+						"description": "Mettre à jour une couleur"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Couleur",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/couleur/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur",
+								"1"
+							]
+						},
+						"description": "Supprimer une couleur"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Couleur - Invalid Hex (Test Error)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Couleur Invalide\",\n    \"codeHex\": \"ZZZZZZ\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/couleur",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"couleur"
+							]
+						},
+						"description": "Test avec code hexadécimal invalide (devrait échouer avec 400)"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
+
