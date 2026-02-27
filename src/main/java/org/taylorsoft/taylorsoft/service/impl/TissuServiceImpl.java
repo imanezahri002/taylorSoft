@@ -1,4 +1,4 @@
-package org.taylorsoft.taylorsoft.service;
+package org.taylorsoft.taylorsoft.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,7 @@ import org.taylorsoft.taylorsoft.exception.ResourceNotFoundException;
 import org.taylorsoft.taylorsoft.mapper.TissuMapper;
 import org.taylorsoft.taylorsoft.repository.TissuRepository;
 import org.taylorsoft.taylorsoft.repository.TypeTissuRepository;
+import org.taylorsoft.taylorsoft.service.TissuService;
 
 import java.util.List;
 import java.util.stream.Collectors;
