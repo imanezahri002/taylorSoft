@@ -32,8 +32,8 @@ public class TissuColor {
 
     // Foreign key to TypeTissu
     @ManyToOne
-    @JoinColumn(name = "type_tissu_id", nullable = false)
-    private TypeTissu typeTissu;
+    @JoinColumn(name = "tissu_id", nullable = false)
+    private Tissu tissu;
 
     // Foreign key to Fournisseur
     @ManyToOne

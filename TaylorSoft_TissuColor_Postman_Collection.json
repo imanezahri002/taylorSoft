@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "tissucolor-crud-collection",
+		"name": "TaylorSoft - TissuColor CRUD",
+		"description": "Collection pour tester les opérations CRUD de TissuColor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create TissuColor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"photo\": \"https://example.com/photo1.jpg\",\n    \"quantity\": 100.5,\n    \"active\": true,\n    \"couleurId\": 1,\n    \"tissuId\": 1,\n    \"fournisseurId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All TissuColors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TissuColor By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TissuColors By Tissu ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color/tissu/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color",
+						"tissu",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TissuColors By Couleur ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color/couleur/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color",
+						"couleur",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get TissuColors By Fournisseur ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color/fournisseur/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color",
+						"fournisseur",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Active TissuColors Only",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color/active",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color",
+						"active"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TissuColor",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"photo\": \"https://example.com/photo-updated.jpg\",\n    \"quantity\": 150.75,\n    \"active\": true,\n    \"couleurId\": 2,\n    \"tissuId\": 1,\n    \"fournisseurId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete TissuColor",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": "Token JWT"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tissu-color/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tissu-color",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": "your_jwt_token_here",
+			"type": "string"
+		}
+	]
+}
+
