@@ -1,0 +1,469 @@
+{
+	"info": {
+		"_postman_id": "taylorsoft-model-collection",
+		"name": "TaylorSoft Model CRUD API",
+		"description": "Collection complète pour tester le CRUD des modèles avec couleurs et photos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Model CRUD",
+			"item": [
+				{
+					"name": "Create Model - Robe Soie Premium",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Robe Soie Premium\",\n  \"description\": \"Robe haute couture en soie naturelle de qualité exceptionnelle\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 1,\n  \"prix\": 350.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/robe-soie-rouge-main.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/robe-soie-rouge-detail1.jpg\",\n          \"principal\": false,\n          \"order\": \"DEUX\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/robe-soie-rouge-detail2.jpg\",\n          \"principal\": false,\n          \"order\": \"TROIS\"\n        }\n      ]\n    },\n    {\n      \"couleurId\": 2,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/robe-soie-bleu-main.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/robe-soie-bleu-detail1.jpg\",\n          \"principal\": false,\n          \"order\": \"DEUX\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						},
+						"description": "Créer un nouveau modèle avec 2 couleurs (Rouge: 3 photos, Bleu: 2 photos)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Model - Chemise Coton",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Chemise Coton Business\",\n  \"description\": \"Chemise professionnelle en coton respirant\",\n  \"tissuId\": 2,\n  \"categorieId\": 2,\n  \"couturierId\": 1,\n  \"prix\": 75.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 3,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/chemise-blanc-main.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/chemise-blanc-detail.jpg\",\n          \"principal\": false,\n          \"order\": \"DEUX\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/chemise-blanc-col.jpg\",\n          \"principal\": false,\n          \"order\": \"TROIS\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/chemise-blanc-manche.jpg\",\n          \"principal\": false,\n          \"order\": \"QUATRE\"\n        }\n      ]\n    },\n    {\n      \"couleurId\": 4,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/chemise-noir-main.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						},
+						"description": "Créer une chemise avec 2 couleurs (Blanc: 4 photos maximum, Noir: 1 photo)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Model - Pantalon Lin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Pantalon Lin Été\",\n  \"description\": \"Pantalon léger en lin pour l'été\",\n  \"tissuId\": 3,\n  \"categorieId\": 3,\n  \"couturierId\": 2,\n  \"prix\": 120.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 5,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/pantalon-beige-main.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/pantalon-beige-detail1.jpg\",\n          \"principal\": false,\n          \"order\": \"DEUX\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						},
+						"description": "Créer un pantalon avec une seule couleur"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Models",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						},
+						"description": "Récupérer tous les modèles avec leurs couleurs et photos"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Model By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"1"
+							]
+						},
+						"description": "Récupérer un modèle spécifique par son ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Models Only",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models/active",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"active"
+							]
+						},
+						"description": "Récupérer uniquement les modèles actifs"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Models By Tissu ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models/tissu/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"tissu",
+								"1"
+							]
+						},
+						"description": "Récupérer tous les modèles utilisant un tissu spécifique"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Models By Couturier ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models/couturier/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"couturier",
+								"1"
+							]
+						},
+						"description": "Récupérer tous les modèles d'un couturier spécifique"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Model",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Robe Soie Premium - Édition Limitée\",\n  \"description\": \"Robe haute couture en soie naturelle de qualité exceptionnelle - Collection Été 2026\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 1,\n  \"prix\": 450.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/robe-soie-rouge-main-v2.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/robe-soie-rouge-detail-v2.jpg\",\n          \"principal\": false,\n          \"order\": \"DEUX\"\n        }\n      ]\n    },\n    {\n      \"couleurId\": 5,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/robe-soie-vert-main.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"1"
+							]
+						},
+						"description": "Mettre à jour un modèle existant (modification du nom, ajout d'une nouvelle couleur Vert)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Model",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"3"
+							]
+						},
+						"description": "Supprimer un modèle (suppression en cascade des couleurs et photos)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validation Tests",
+			"item": [
+				{
+					"name": "Test - Multiple Photos Principales (ERREUR)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Test Validation - Multiple Photos Principales\",\n  \"description\": \"Ce modèle devrait échouer car il a 2 photos principales pour une couleur\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 1,\n  \"prix\": 100.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/photo1.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/photo2.jpg\",\n          \"principal\": true,\n          \"order\": \"DEUX\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						},
+						"description": "Test validation : Erreur attendue - doit avoir exactement 1 photo principale par couleur"
+					},
+					"response": []
+				},
+				{
+					"name": "Test - Pas de Photo Principale (ERREUR)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Test Validation - Pas de Photo Principale\",\n  \"description\": \"Ce modèle devrait échouer car aucune photo principale\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 1,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/photo1.jpg\",\n          \"principal\": false,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/photo2.jpg\",\n          \"principal\": false,\n          \"order\": \"DEUX\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						},
+						"description": "Test validation : Erreur attendue - doit avoir exactement 1 photo principale"
+					},
+					"response": []
+				},
+				{
+					"name": "Test - Plus de 4 Photos (ERREUR)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Test Validation - Trop de Photos\",\n  \"description\": \"Ce modèle devrait échouer car plus de 4 photos\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 1,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/images/photo1.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/photo2.jpg\",\n          \"principal\": false,\n          \"order\": \"DEUX\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/photo3.jpg\",\n          \"principal\": false,\n          \"order\": \"TROIS\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/photo4.jpg\",\n          \"principal\": false,\n          \"order\": \"QUATRE\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/images/photo5.jpg\",\n          \"principal\": false,\n          \"order\": \"CINQ\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						},
+						"description": "Test validation : Erreur attendue - maximum 4 photos par couleur"
+					},
+					"response": []
+				},
+				{
+					"name": "Test - Sans Couleurs (ERREUR)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Test Validation - Sans Couleurs\",\n  \"description\": \"Ce modèle devrait échouer car aucune couleur\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 1,\n  \"active\": true,\n  \"couleurs\": []\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						},
+						"description": "Test validation : Erreur attendue - au moins une couleur obligatoire"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
+

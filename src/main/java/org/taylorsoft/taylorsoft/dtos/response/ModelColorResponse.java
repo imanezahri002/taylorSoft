@@ -5,14 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TypeEchantillonResponse {
+public class ModelColorResponse {
 
     private Long id;
-    private String nom;
-    private String description;
+    private CouleurResponse couleur;
+    // Photos associées
+    private List<ModelPhotoResponse> photos;
 }
 
