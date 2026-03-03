@@ -16,9 +16,6 @@ public class TissuColorRequest {
     @NotBlank(message = "La photo est obligatoire")
     private String photo;
 
-    @NotNull(message = "La quantité est obligatoire")
-    private Double quantity;
-
     @NotNull(message = "Le statut actif est obligatoire")
     private Boolean active;
 
@@ -28,6 +25,4 @@ public class TissuColorRequest {
     @NotNull(message = "L'ID du tissu est obligatoire")
     private Long tissuId;
 
-    @NotNull(message = "L'ID du fournisseur est obligatoire")
-    private Long fournisseurId;
 }

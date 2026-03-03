@@ -21,8 +21,6 @@ public interface TissuColorService {
 
     List<TissuColorResponse> getByCouleurId(Long couleurId);
 
-    List<TissuColorResponse> getByFournisseurId(Long fournisseurId);
-
     List<TissuColorResponse> getActiveOnly();
 }
 

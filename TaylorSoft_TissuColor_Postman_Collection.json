@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "taylorsoft-tissucolor-collection",
+		"name": "TaylorSoft TissuColor CRUD API",
+		"description": "Collection pour tester le CRUD des combinaisons Tissu-Couleur",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TissuColor CRUD",
+			"item": [
+				{
+					"name": "Create TissuColor - Soie Rouge",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tissuId\": 1,\n    \"couleurId\": 1,\n    \"photo\": \"soie_rouge.jpg\",\n    \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color"
+							]
+						},
+						"description": "Créer une nouvelle combinaison Tissu-Couleur (Soie Rouge)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create TissuColor - Coton Bleu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tissuId\": 2,\n    \"couleurId\": 2,\n    \"photo\": \"coton_bleu.jpg\",\n    \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color"
+							]
+						},
+						"description": "Créer une combinaison Coton Bleu"
+					},
+					"response": []
+				},
+				{
+					"name": "Create TissuColor - Lin Vert",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tissuId\": 3,\n    \"couleurId\": 3,\n    \"photo\": \"lin_vert.jpg\",\n    \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color"
+							]
+						},
+						"description": "Créer une combinaison Lin Vert"
+					},
+					"response": []
+				},
+				{
+					"name": "Create TissuColor - Soie Bleu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tissuId\": 1,\n    \"couleurId\": 2,\n    \"photo\": \"soie_bleu.jpg\",\n    \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color"
+							]
+						},
+						"description": "Créer une combinaison Soie Bleu"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All TissuColors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color"
+							]
+						},
+						"description": "Récupérer toutes les combinaisons Tissu-Couleur"
+					},
+					"response": []
+				},
+				{
+					"name": "Get TissuColor By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color",
+								"1"
+							]
+						},
+						"description": "Récupérer une combinaison Tissu-Couleur par ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Get TissuColors By Tissu ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color/tissu/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color",
+								"tissu",
+								"1"
+							]
+						},
+						"description": "Récupérer toutes les couleurs disponibles pour un tissu spécifique"
+					},
+					"response": []
+				},
+				{
+					"name": "Get TissuColors By Couleur ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color/couleur/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color",
+								"couleur",
+								"1"
+							]
+						},
+						"description": "Récupérer tous les tissus disponibles dans une couleur spécifique"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active TissuColors Only",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color/active",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color",
+								"active"
+							]
+						},
+						"description": "Récupérer uniquement les combinaisons Tissu-Couleur actives"
+					},
+					"response": []
+				},
+				{
+					"name": "Update TissuColor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tissuId\": 1,\n    \"couleurId\": 1,\n    \"photo\": \"soie_rouge_updated.jpg\",\n    \"active\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color",
+								"1"
+							]
+						},
+						"description": "Mettre à jour une combinaison Tissu-Couleur (ex: désactiver)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete TissuColor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tissu-color/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tissu-color",
+								"1"
+							]
+						},
+						"description": "Supprimer une combinaison Tissu-Couleur"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scenarios de test complets",
+			"item": [
+				{
+					"name": "Scenario 1 - Fournisseur ajoute stock",
+					"item": [
+						{
+							"name": "1. Create Soie Rouge",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tissuId\": 1,\n    \"couleurId\": 1,\n    \"photo\": \"soie_rouge_premium.jpg\",\n    \"active\": true\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tissu-color",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tissu-color"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Create Soie Bleu",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tissuId\": 1,\n    \"couleurId\": 2,\n    \"photo\": \"soie_bleu_premium.jpg\",\n    \"active\": true\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/tissu-color",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tissu-color"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Get All Colors for Soie",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/tissu-color/tissu/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tissu-color",
+										"tissu",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Scenario 2 - Couturier consulte tissus disponibles",
+					"item": [
+						{
+							"name": "1. Get Active TissuColors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/tissu-color/active",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"tissu-color",
+										"active"
+									]
+								},
+								"description": "Le couturier voit tous les tissus disponibles avec leurs couleurs"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
+

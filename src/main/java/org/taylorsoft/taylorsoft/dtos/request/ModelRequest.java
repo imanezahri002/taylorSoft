@@ -31,8 +31,7 @@ public class ModelRequest {
 
     @NotNull(message = "Le couturier est obligatoire")
     private Long couturierId;
-
-    @NotNull(message = "Le prix est obligatoire")
+    @NotNull(message = "Le prix du modèle est obligatoire")
     private Double prix;
 
     @NotEmpty(message = "Au moins une couleur est obligatoire")

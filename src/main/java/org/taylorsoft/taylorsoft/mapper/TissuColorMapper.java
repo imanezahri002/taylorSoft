@@ -13,7 +13,6 @@ public interface TissuColorMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "couleur", ignore = true)
     @Mapping(target = "tissu", ignore = true)
-    @Mapping(target = "fournisseur", ignore = true)
     TissuColor toEntity(TissuColorRequest request);
 
     @Mapping(source = "couleur.id", target = "couleurId")
@@ -22,15 +21,11 @@ public interface TissuColorMapper {
     @Mapping(source = "tissu.id", target = "tissuId")
     @Mapping(source = "tissu.reference", target = "tissuReference")
     @Mapping(source = "tissu.nom", target = "tissuNom")
-    @Mapping(source = "fournisseur.id", target = "fournisseurId")
-    @Mapping(source = "fournisseur.nom", target = "fournisseurNom")
-    @Mapping(source = "fournisseur.email", target = "fournisseurEmail")
     TissuColorResponse toResponse(TissuColor tissuColor);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "couleur", ignore = true)
     @Mapping(target = "tissu", ignore = true)
-    @Mapping(target = "fournisseur", ignore = true)
     void updateEntityFromRequest(TissuColorRequest request, @MappingTarget TissuColor tissuColor);
 }
 

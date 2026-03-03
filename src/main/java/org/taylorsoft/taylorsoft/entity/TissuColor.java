@@ -20,9 +20,6 @@ public class TissuColor {
     @Column(nullable = false)
     private String photo;
 
-    @Column(nullable = false)
-    private Double quantity;
-
     private boolean active;
 
     // Foreign key to Couleur
@@ -34,9 +31,4 @@ public class TissuColor {
     @ManyToOne
     @JoinColumn(name = "tissu_id", nullable = false)
     private Tissu tissu;
-
-    // Foreign key to Fournisseur
-    @ManyToOne
-    @JoinColumn(name = "fournisseur_id", nullable = false)
-    private Fournisseur fournisseur;
 }

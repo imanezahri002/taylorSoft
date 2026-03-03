@@ -26,7 +26,8 @@ public class Model {
     @Column(nullable = false)
     private Double prix;
     @Column(nullable = false)
-    boolean visibility;
+    @Builder.Default
+    private boolean visibility = true;
     @Column(nullable=false)
     private Boolean active = true;
 

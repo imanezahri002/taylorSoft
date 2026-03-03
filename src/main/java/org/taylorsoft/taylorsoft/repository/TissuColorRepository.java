@@ -10,7 +10,6 @@ import java.util.List;
 public interface TissuColorRepository extends JpaRepository<TissuColor, Long> {
     List<TissuColor> findByTissuId(Long tissuId);
     List<TissuColor> findByCouleurId(Long couleurId);
-    List<TissuColor> findByFournisseurId(Long fournisseurId);
     List<TissuColor> findByActiveTrue();
 }
 

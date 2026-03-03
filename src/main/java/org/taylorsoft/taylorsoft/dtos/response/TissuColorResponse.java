@@ -13,7 +13,6 @@ public class TissuColorResponse {
 
     private Long id;
     private String photo;
-    private Double quantity;
     private Boolean active;
 
     // Couleur
@@ -25,11 +24,6 @@ public class TissuColorResponse {
     private Long tissuId;
     private String tissuReference;
     private String tissuNom;
-
-    // Fournisseur
-    private Long fournisseurId;
-    private String fournisseurNom;
-    private String fournisseurEmail;
 }
 
 

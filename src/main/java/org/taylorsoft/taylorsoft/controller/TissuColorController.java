@@ -83,14 +83,6 @@ public class TissuColorController {
         return ResponseEntity.ok(responses);
     }
 
-    /**
-     * Récupérer les TissuColor par Fournisseur ID
-     */
-    @GetMapping("/fournisseur/{fournisseurId}")
-    public ResponseEntity<List<TissuColorResponse>> getByFournisseurId(@PathVariable Long fournisseurId) {
-        List<TissuColorResponse> responses = tissuColorService.getByFournisseurId(fournisseurId);
-        return ResponseEntity.ok(responses);
-    }
 
     /**
      * Récupérer uniquement les TissuColor actifs

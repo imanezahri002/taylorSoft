@@ -41,14 +41,9 @@ public class TissuColorServiceImpl implements TissuColorService {
         Tissu tissu = tissuRepository.findById(request.getTissuId())
                 .orElseThrow(() -> new ResourceNotFoundException("Tissu non trouvé avec l'ID: " + request.getTissuId()));
 
-        // Vérifier que le fournisseur existe
-        Fournisseur fournisseur = fournisseurRepository.findById(request.getFournisseurId())
-                .orElseThrow(() -> new ResourceNotFoundException("Fournisseur non trouvé avec l'ID: " + request.getFournisseurId()));
-
         TissuColor tissuColor = tissuColorMapper.toEntity(request);
         tissuColor.setCouleur(couleur);
         tissuColor.setTissu(tissu);
-        tissuColor.setFournisseur(fournisseur);
 
         TissuColor savedTissuColor = tissuColorRepository.save(tissuColor);
         return tissuColorMapper.toResponse(savedTissuColor);
@@ -83,14 +78,9 @@ public class TissuColorServiceImpl implements TissuColorService {
         Tissu tissu = tissuRepository.findById(request.getTissuId())
                 .orElseThrow(() -> new ResourceNotFoundException("Tissu non trouvé avec l'ID: " + request.getTissuId()));
 
-        // Vérifier que le fournisseur existe
-        Fournisseur fournisseur = fournisseurRepository.findById(request.getFournisseurId())
-                .orElseThrow(() -> new ResourceNotFoundException("Fournisseur non trouvé avec l'ID: " + request.getFournisseurId()));
-
         tissuColorMapper.updateEntityFromRequest(request, tissuColor);
         tissuColor.setCouleur(couleur);
         tissuColor.setTissu(tissu);
-        tissuColor.setFournisseur(fournisseur);
 
         TissuColor updatedTissuColor = tissuColorRepository.save(tissuColor);
         return tissuColorMapper.toResponse(updatedTissuColor);
@@ -116,14 +106,6 @@ public class TissuColorServiceImpl implements TissuColorService {
     @Transactional(readOnly = true)
     public List<TissuColorResponse> getByCouleurId(Long couleurId) {
         return tissuColorRepository.findByCouleurId(couleurId).stream()
-                .map(tissuColorMapper::toResponse)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<TissuColorResponse> getByFournisseurId(Long fournisseurId) {
-        return tissuColorRepository.findByFournisseurId(fournisseurId).stream()
                 .map(tissuColorMapper::toResponse)
                 .collect(Collectors.toList());
     }
