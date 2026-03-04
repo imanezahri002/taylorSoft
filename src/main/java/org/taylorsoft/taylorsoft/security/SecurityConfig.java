@@ -50,6 +50,7 @@ public class SecurityConfig {
                                 "/api/models/**",
                                 "/api/categories/**",
                                 "/api/coutourier-orders/**",
+                                "/api/stocks/**",
                                 "/error"
                         ).permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")

@@ -15,6 +15,7 @@ import org.taylorsoft.taylorsoft.repository.CoutourierRepository;
 import org.taylorsoft.taylorsoft.repository.FournisseurRepository;
 import org.taylorsoft.taylorsoft.repository.TissuColorRepository;
 import org.taylorsoft.taylorsoft.service.CoutourierOrderService;
+import org.taylorsoft.taylorsoft.service.StockService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +30,7 @@ public class CoutourierOrderServiceImpl implements CoutourierOrderService {
     private final FournisseurRepository fournisseurRepository;
     private final TissuColorRepository tissuColorRepository;
     private final CoutourierOrderMapper mapper;
+    private final StockService stockService;
 
     @Override
     public CoutourierOrderResponse create(CoutourierOrderRequest request) {
@@ -172,8 +174,17 @@ public class CoutourierOrderServiceImpl implements CoutourierOrderService {
         CoutourierOrder order = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Commande non trouvée"));
 
+        CoutourierOrderStatus oldStatus = order.getStatus();
         order.setStatus(status);
-        return mapper.toResponse(repository.save(order));
+
+        CoutourierOrder savedOrder = repository.save(order);
+
+        // Si le statut passe à LIVREE, mettre à jour le stock automatiquement
+        if (status == CoutourierOrderStatus.LIVREE && oldStatus != CoutourierOrderStatus.LIVREE) {
+            stockService.updateStockFromOrder(savedOrder);
+        }
+
+        return mapper.toResponse(savedOrder);
     }
 }
 

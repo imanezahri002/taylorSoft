@@ -1,0 +1,139 @@
+{
+  "info": {
+    "name": "Test Stock - Changement Statut Commande",
+    "description": "Tests pour vérifier la création automatique du stock lors du changement de statut d'une commande en LIVREE"
+  },
+  "tests": [
+    {
+      "name": "1. Créer une commande avec statut EN_ATTENTE",
+      "method": "POST",
+      "url": "http://localhost:8080/api/coutourier-orders",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "couturierId": 1,
+        "items": [
+          {
+            "tissuColorId": 1,
+            "nombreMetres": 100.0
+          },
+          {
+            "tissuColorId": 2,
+            "nombreMetres": 50.0
+          }
+        ]
+      },
+      "expected": {
+        "status": "EN_ATTENTE",
+        "note": "La commande est créée avec statut EN_ATTENTE"
+      }
+    },
+    {
+      "name": "2. Changer le statut de la commande en LIVREE",
+      "method": "PATCH",
+      "url": "http://localhost:8080/api/coutourier-orders/{orderId}/status",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "status": "LIVREE"
+      },
+      "note": "Remplacer {orderId} par l'ID de la commande créée à l'étape 1",
+      "expected": {
+        "description": "Le statut change en LIVREE et le stock est automatiquement créé/mis à jour"
+      }
+    },
+    {
+      "name": "3. Vérifier que le stock a été créé pour le couturier",
+      "method": "GET",
+      "url": "http://localhost:8080/api/stocks/coutourier/1",
+      "expected": {
+        "description": "Devrait retourner les stocks créés avec les quantités correctes",
+        "example": [
+          {
+            "id": 1,
+            "tissuColor": {
+              "id": 1,
+              "photo": "soie_rouge.jpg",
+              "prixUnitaire": 25.0,
+              "couleur": {
+                "nom": "Rouge"
+              },
+              "tissu": {
+                "nom": "Coton Premium"
+              }
+            },
+            "couturierId": 1,
+            "coutourierNom": "Martin",
+            "coutourierPrenom": "Marie",
+            "quantiteOnHand": 100.0,
+            "mouvements": [
+              {
+                "id": 1,
+                "quantite": 100.0,
+                "type": "IN",
+                "description": "Commande #1 livrée - Coton Premium Rouge"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "4. Consulter un stock spécifique",
+      "method": "GET",
+      "url": "http://localhost:8080/api/stocks/1",
+      "expected": {
+        "description": "Retourne les détails du stock avec ses mouvements (sans boucle infinie)"
+      }
+    },
+    {
+      "name": "5. Créer une deuxième commande pour le même couturier",
+      "method": "POST",
+      "url": "http://localhost:8080/api/coutourier-orders",
+      "body": {
+        "couturierId": 1,
+        "items": [
+          {
+            "tissuColorId": 1,
+            "nombreMetres": 50.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "6. Changer le statut de la 2ème commande en LIVREE",
+      "method": "PATCH",
+      "url": "http://localhost:8080/api/coutourier-orders/{orderId}/status",
+      "body": {
+        "status": "LIVREE"
+      },
+      "note": "Le stock existant devrait être mis à jour (100 + 50 = 150 mètres)"
+    },
+    {
+      "name": "7. Vérifier la mise à jour du stock",
+      "method": "GET",
+      "url": "http://localhost:8080/api/stocks/coutourier/1",
+      "expected": {
+        "description": "La quantité du stock tissuColorId=1 devrait être 150.0",
+        "example": {
+          "quantiteOnHand": 150.0,
+          "mouvements": [
+            {
+              "quantite": 100.0,
+              "type": "IN",
+              "description": "Commande #1 livrée..."
+            },
+            {
+              "quantite": 50.0,
+              "type": "IN",
+              "description": "Commande #2 livrée..."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+
