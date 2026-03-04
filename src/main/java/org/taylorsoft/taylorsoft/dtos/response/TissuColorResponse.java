@@ -13,6 +13,7 @@ public class TissuColorResponse {
 
     private Long id;
     private String photo;
+    private Double prixUnitaire;
     private Boolean active;
 
     // Couleur

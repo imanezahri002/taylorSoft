@@ -7,31 +7,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tissu_color")
+@Table(name = "coutourier_order_items")
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TissuColor {
+public class CoutourierOrderItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String photo;
+    private Double nombreMetres;
 
     @Column(nullable = false)
-    private Double prixUnitaire;
+    private Double prixTotalMetres;
 
-    private boolean active;
-
-    // Foreign key to Couleur
+    // Foreign key vers CoutourierOrder
     @ManyToOne
-    @JoinColumn(name = "couleur_id", nullable = false)
-    private Couleur couleur;
+    @JoinColumn(name = "coutourier_order_id", nullable = false)
+    private CoutourierOrder coutourierOrder;
 
-    // Foreign key to TypeTissu
+    // Foreign key vers TissuColor
     @ManyToOne
-    @JoinColumn(name = "tissu_id", nullable = false)
-    private Tissu tissu;
+    @JoinColumn(name = "tissu_color_id", nullable = false)
+    private TissuColor tissuColor;
 }
+
