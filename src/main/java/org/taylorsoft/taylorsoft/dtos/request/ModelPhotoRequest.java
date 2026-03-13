@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.taylorsoft.taylorsoft.entity.Order;
 import org.taylorsoft.taylorsoft.entity.enums.Ordre;
 
 @Data

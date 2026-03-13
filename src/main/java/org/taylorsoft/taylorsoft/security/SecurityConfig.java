@@ -51,6 +51,7 @@ public class SecurityConfig {
                                 "/api/categories/**",
                                 "/api/coutourier-orders/**",
                                 "/api/stocks/**",
+                                "/api/commande-client/**",
                                 "/error"
                         ).permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")

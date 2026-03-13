@@ -1,6 +1,6 @@
 package org.taylorsoft.taylorsoft.entity.enums;
 
-public enum OrderStatus {
+public enum CommandeStatus {
     EN_ATTENTE,   // En attente
     EN_COURS,     // En cours
     ESSAYAGE,     // Essayage
