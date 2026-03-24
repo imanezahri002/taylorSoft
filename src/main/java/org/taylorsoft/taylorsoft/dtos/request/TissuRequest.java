@@ -19,9 +19,10 @@ public class TissuRequest {
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
 
+
+
     private Double largeur;
 
-    @NotNull(message = "Le statut actif est obligatoire")
     private Boolean active;
 
     @NotNull(message = "L'ID du type de tissu est obligatoire")

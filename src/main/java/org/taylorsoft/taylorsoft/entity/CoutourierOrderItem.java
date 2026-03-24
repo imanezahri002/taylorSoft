@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "coutourier_order_items")
 @Builder
@@ -33,5 +35,12 @@ public class CoutourierOrderItem {
     @ManyToOne
     @JoinColumn(name = "tissu_color_id", nullable = false)
     private TissuColor tissuColor;
+
+    //created at et updated at
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 }
 

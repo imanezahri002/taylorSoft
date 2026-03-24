@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "tissu")
 @Builder
@@ -24,6 +26,9 @@ public class Tissu {
     @Column(nullable = false, length = 100)
     private String nom;
 
+    @Column(nullable = false)
+    private Double prixMetre;
+
     @Column
     private Double largeur;
 
@@ -33,5 +38,13 @@ public class Tissu {
     @ManyToOne
     @JoinColumn(name = "type_tissu_id", nullable = false)
     private TypeTissu typeTissu;
+
+    //created at et updated at
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    //updated at
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 }
 
