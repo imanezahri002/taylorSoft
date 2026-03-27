@@ -26,6 +26,9 @@ public class Client extends User {
     @Column(length = 1000)
     private String notes;
 
+    @Column(length = 1000)
+    private String preferences;
+
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
     private Mesure mesure;
 }

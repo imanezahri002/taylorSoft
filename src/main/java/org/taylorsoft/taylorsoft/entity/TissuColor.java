@@ -20,9 +20,6 @@ public class TissuColor {
     @Column(nullable = false)
     private String photo;
 
-    @Column(nullable = false)
-    private Double prixUnitaire;
-
     private boolean active;
 
     // Foreign key to Couleur

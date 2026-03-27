@@ -12,7 +12,10 @@ public interface TissuMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "typeTissu", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
     Tissu toEntity(TissuRequest request);
+
 
     @Mapping(source = "typeTissu.id", target = "typeTissuId")
     @Mapping(source = "typeTissu.nom", target = "typeTissuNom")
@@ -20,6 +23,8 @@ public interface TissuMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "typeTissu", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
     void updateEntityFromRequest(TissuRequest request, @MappingTarget Tissu tissu);
 }
 

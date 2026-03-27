@@ -16,9 +16,6 @@ public class TissuColorRequest {
     @NotBlank(message = "La photo est obligatoire")
     private String photo;
 
-    @NotNull(message = "Le prix unitaire est obligatoire")
-    private Double prixUnitaire;
-
     @NotNull(message = "Le statut actif est obligatoire")
     private Boolean active;
 

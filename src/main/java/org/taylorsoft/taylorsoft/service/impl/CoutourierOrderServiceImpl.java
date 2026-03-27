@@ -42,8 +42,9 @@ public class CoutourierOrderServiceImpl implements CoutourierOrderService {
         Fournisseur fournisseur = fournisseurRepository.findById(request.getFournisseurId())
                 .orElseThrow(() -> new ResourceNotFoundException("Fournisseur non trouvé"));
 
-        // Créer la commande
-        CoutourierOrder order = mapper.toEntity(request);
+        // Créer la commande avec le statut défini à EN_ATTENTE par défaut
+        CoutourierOrder order = new CoutourierOrder();
+        order.setStatus(CoutourierOrderStatus.EN_ATTENTE);
         order.setCoutourier(coutourier);
         order.setFournisseur(fournisseur);
 
@@ -62,7 +63,7 @@ public class CoutourierOrderServiceImpl implements CoutourierOrderService {
             item.setNombreMetres(itemRequest.getNombreMetres());
 
             // Calculer le prix total pour cet item
-            double prixTotalItem = itemRequest.getNombreMetres() * tissuColor.getPrixUnitaire();
+            double prixTotalItem = itemRequest.getNombreMetres() * tissuColor.getTissu().getPrixMetre();
             item.setPrixTotalMetres(prixTotalItem);
 
             // Ajouter au prix total de la commande
@@ -124,7 +125,7 @@ public class CoutourierOrderServiceImpl implements CoutourierOrderService {
             item.setTissuColor(tissuColor);
             item.setNombreMetres(itemRequest.getNombreMetres());
 
-            double prixTotalItem = itemRequest.getNombreMetres() * tissuColor.getPrixUnitaire();
+            double prixTotalItem = itemRequest.getNombreMetres() * tissuColor.getTissu().getPrixMetre();
             item.setPrixTotalMetres(prixTotalItem);
 
             prixTotalCommande += prixTotalItem;

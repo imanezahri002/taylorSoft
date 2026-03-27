@@ -1,0 +1,1247 @@
+{
+  "info": {
+    "name": "TaylorSoft API",
+    "description": "Collection complète pour tester les services TaylorSoft avec des données valides selon les DTOs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"nouvelutilisateur@example.com\",\n  \"password\": \"motdepassesecurise123\",\n  \"role\": \"CLIENT\",\n  \"nom\": \"Dupont\",\n  \"prenom\": \"Jean\",\n  \"telephone\": \"0612345678\",\n  \"adresse\": \"123 Rue de la Paix, 75000 Paris\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "register"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Users",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"utilisateur@example.com\",\n  \"password\": \"motdepasse123\",\n  \"role\": \"COUTOURIER\",\n  \"nom\": \"Martin\",\n  \"prenom\": \"Pierre\",\n  \"telephone\": \"0687654321\",\n  \"adresse\": \"456 Avenue des Champs, 75008 Paris\",\n  \"statut\": \"ACTIF\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "users"]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "List All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/users?page=0&size=20",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"utilisateurmaj@example.com\",\n  \"role\": \"FOURNISSEUR\",\n  \"nom\": \"Durand\",\n  \"prenom\": \"Marie\",\n  \"telephone\": \"0698765432\",\n  \"adresse\": \"789 Boulevard Saint-Germain, 75005 Paris\",\n  \"statut\": \"ACTIF\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "users", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Costumes\",\n  \"description\": \"Collection de costumes formels et élégants pour les occasions spéciales\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/categories",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Get Category by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/categories/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Robes de Soirée\",\n  \"description\": \"Magnifiques robes de soirée pour tous les événements\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/categories/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Colors",
+      "item": [
+        {
+          "name": "Create Color",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Noir\",\n  \"codeHex\": \"#000000\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/couleur",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "couleur"]
+            }
+          }
+        },
+        {
+          "name": "Get All Colors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/couleur",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "couleur"]
+            }
+          }
+        },
+        {
+          "name": "Get Color by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/couleur/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "couleur", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Color",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Bleu Marine\",\n  \"codeHex\": \"#001F3F\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/couleur/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "couleur", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Color",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/couleur/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "couleur", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Measurements",
+      "item": [
+        {
+          "name": "Create Measurement",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"tourCou\": 38.5,\n  \"poitrine\": 95.0,\n  \"taille\": 80.0,\n  \"manche\": 58.0,\n  \"longueurDos\": 65.0,\n  \"jambe\": 75.0,\n  \"epaule\": 42.0,\n  \"bras\": 32.0\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mesures",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "mesures"]
+            }
+          }
+        },
+        {
+          "name": "Get All Measurements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mesures",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "mesures"]
+            }
+          }
+        },
+        {
+          "name": "Get Measurement by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mesures/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "mesures", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Measurement by Client ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mesures/client/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "mesures", "client", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Measurement",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"tourCou\": 39.0,\n  \"poitrine\": 96.0,\n  \"taille\": 81.0,\n  \"manche\": 59.0,\n  \"longueurDos\": 66.0,\n  \"jambe\": 76.0,\n  \"epaule\": 43.0,\n  \"bras\": 33.0\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/mesures/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "mesures", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Measurement",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/mesures/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "mesures", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fabric Types",
+      "item": [
+        {
+          "name": "Create Fabric Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Coton\",\n  \"description\": \"Tissu de coton naturel, respirant et confortable\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/type-tissu",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "type-tissu"]
+            }
+          }
+        },
+        {
+          "name": "Get All Fabric Types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/type-tissu",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "type-tissu"]
+            }
+          }
+        },
+        {
+          "name": "Get Fabric Type by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/type-tissu/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "type-tissu", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Fabric Type",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Soie\",\n  \"description\": \"Tissu de soie premium, luxueux et doux\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/type-tissu/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "type-tissu", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Fabric Type",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/type-tissu/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "type-tissu", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fabrics",
+      "item": [
+        {
+          "name": "Create Fabric",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reference\": \"COTON001\",\n  \"nom\": \"Coton Peigné Premium\",\n  \"prixMetre\": 12.50,\n  \"largeur\": 150.0,\n  \"active\": true,\n  \"typeTissuId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/tissu",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu"]
+            }
+          }
+        },
+        {
+          "name": "Get All Fabrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu"]
+            }
+          }
+        },
+        {
+          "name": "Get Fabric by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Fabric",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reference\": \"COTON002\",\n  \"nom\": \"Coton Égyptien\",\n  \"prixMetre\": 13.75,\n  \"largeur\": 160.0,\n  \"active\": true,\n  \"typeTissuId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/tissu/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Fabric",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fabric Colors",
+      "item": [
+        {
+          "name": "Create Fabric Color",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"photo\": \"https://example.com/images/coton-noir.jpg\",\n  \"prixUnitaire\": 25.50,\n  \"active\": true,\n  \"couleurId\": 1,\n  \"tissuId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/tissu-color",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu-color"]
+            }
+          }
+        },
+        {
+          "name": "Get All Fabric Colors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu-color",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu-color"]
+            }
+          }
+        },
+        {
+          "name": "Get Fabric Color by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu-color/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu-color", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Fabric Color",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"photo\": \"https://example.com/images/coton-noir-updated.jpg\",\n  \"prixUnitaire\": 26.75,\n  \"active\": true,\n  \"couleurId\": 1,\n  \"tissuId\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/tissu-color/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu-color", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Fabric Color",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu-color/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu-color", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Fabric Colors by Fabric ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu-color/tissu/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu-color", "tissu", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Fabric Colors by Color ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu-color/couleur/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu-color", "couleur", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Active Fabric Colors Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/tissu-color/active",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "tissu-color", "active"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Models",
+      "item": [
+        {
+          "name": "Create Model",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Costume Deux Pièces Premium\",\n  \"description\": \"Costume élégant deux pièces en coton haute qualité\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 1,\n  \"prix\": 350.00,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/costume-noir-1.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        },\n        {\n          \"photoUrl\": \"https://example.com/costume-noir-2.jpg\",\n          \"principal\": false,\n          \"order\": \"DEUX\"\n        }\n      ]\n    }\n  ],\n  \"active\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/models",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "models"]
+            }
+          }
+        },
+        {
+          "name": "Get All Models",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/models",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "models"]
+            }
+          }
+        },
+        {
+          "name": "Get Model by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/models/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "models", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Model",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Costume Trois Pièces Luxe\",\n  \"description\": \"Costume luxe trois pièces avec gilet assortis\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 1,\n  \"prix\": 450.00,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"photos\": [\n        {\n          \"photoUrl\": \"https://example.com/costume-luxe-1.jpg\",\n          \"principal\": true,\n          \"order\": \"UN\"\n        }\n      ]\n    }\n  ],\n  \"active\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/models/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "models", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Model",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/models/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "models", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Models by Fabric ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/models/tissu/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "models", "tissu", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Models by Tailor ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/models/couturier/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "models", "couturier", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Active Models Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/models/active",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "models", "active"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Client Orders",
+      "item": [
+        {
+          "name": "Create Client Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": 1,\n  \"statut\": \"EN_ATTENTE\",\n  \"items\": [\n    {\n      \"modelColorId\": 1,\n      \"quantite\": 2.0,\n      \"prixUnitaire\": 350.00\n    },\n    {\n      \"modelColorId\": 2,\n      \"quantite\": 1.0,\n      \"prixUnitaire\": 250.00\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/commande-client",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "commande-client"]
+            }
+          }
+        },
+        {
+          "name": "Get All Client Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/commande-client",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "commande-client"]
+            }
+          }
+        },
+        {
+          "name": "Get Client Order by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/commande-client/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "commande-client", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Orders by Client ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/commande-client/client/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "commande-client", "client", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Orders by Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/commande-client/statut/EN_ATTENTE",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "commande-client", "statut", "EN_ATTENTE"]
+            }
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/commande-client/1/statut?statut=EN_COURS",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "commande-client", "1", "statut"],
+              "query": [
+                {
+                  "key": "statut",
+                  "value": "EN_COURS"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Client Order",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/commande-client/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "commande-client", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tailor Orders",
+      "item": [
+        {
+          "name": "Create Tailor Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"EN_ATTENTE\",\n  \"couturierId\": 1,\n  \"fournisseurId\": 1,\n  \"items\": [\n    {\n      \"tissuColorId\": 1,\n      \"nombreMetres\": 10.5\n    },\n    {\n      \"tissuColorId\": 2,\n      \"nombreMetres\": 5.0\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders"]
+            }
+          }
+        },
+        {
+          "name": "Get All Tailor Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders"]
+            }
+          }
+        },
+        {
+          "name": "Get Tailor Order by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Tailor Order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"CONFIRMEE\",\n  \"couturierId\": 1,\n  \"fournisseurId\": 1,\n  \"items\": [\n    {\n      \"tissuColorId\": 1,\n      \"nombreMetres\": 12.0\n    },\n    {\n      \"tissuColorId\": 2,\n      \"nombreMetres\": 6.5\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Tailor Order",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Orders by Tailor ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders/coutourier/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders", "coutourier", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Orders by Supplier ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders/fournisseur/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders", "fournisseur", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Orders by Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders/status/EN_ATTENTE",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders", "status", "EN_ATTENTE"]
+            }
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/coutourier-orders/1/status?status=CONFIRMEE",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "coutourier-orders", "1", "status"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "CONFIRMEE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stock",
+      "item": [
+        {
+          "name": "Get All Stocks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/stocks",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "stocks"]
+            }
+          }
+        },
+        {
+          "name": "Get Stock by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/stocks/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "stocks", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Stocks by Tailor ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/stocks/coutourier/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "stocks", "coutourier", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Stocks by Fabric Color ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/stocks/tissu-color/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "stocks", "tissu-color", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+

@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.taylorsoft.taylorsoft.entity.enums.Role;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -44,4 +46,33 @@ public class UserRequest {
 
     @Size(max = 20, message = "Le statut ne peut pas dépasser 20 caractères")
     private String statut;
+
+    // ===== CHAMPS SPÉCIFIQUES AUX FOURNISSEURS =====
+    @Size(max = 255, message = "Le nom de l'entreprise ne peut pas dépasser 255 caractères")
+    private String nomEntreprise;
+
+    @Size(max = 50, message = "Le registre de commerce ne peut pas dépasser 50 caractères")
+    private String registreCommerce;
+
+    @Size(max = 50, message = "L'ICE ne peut pas dépasser 50 caractères")
+    private String ice;
+
+    @Size(max = 255, message = "Le site web ne peut pas dépasser 255 caractères")
+    private String siteWeb;
+
+    @Size(max = 1000, message = "La description ne peut pas dépasser 1000 caractères")
+    private String description;
+
+    // ===== CHAMPS SPÉCIFIQUES AUX COUTURIERS =====
+    @Size(max = 5, message = "L'expérience doit être un nombre (années)")
+    private Integer experience;
+
+    // ===== CHAMPS SPÉCIFIQUES AUX CLIENTS =====
+    private LocalDate dateNaissance;
+
+    @Size(max = 1000, message = "Les notes ne peuvent pas dépasser 1000 caractères")
+    private String notes;
+
+    @Size(max = 1000, message = "Les préférences ne peuvent pas dépasser 1000 caractères")
+    private String preferences;
 }

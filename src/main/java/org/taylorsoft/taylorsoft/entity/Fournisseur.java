@@ -13,4 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Fournisseur extends User {
 
+    private String nomEntreprise;
+
+    private String registreCommerce;
+
+    private String ice; // identifiant entreprise Maroc
+
+    private String siteWeb;
+
+    private String description;
 }

@@ -13,6 +13,7 @@ import org.taylorsoft.taylorsoft.repository.TissuRepository;
 import org.taylorsoft.taylorsoft.repository.TypeTissuRepository;
 import org.taylorsoft.taylorsoft.service.TissuService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,8 @@ public class TissuServiceImpl implements TissuService {
 
         Tissu tissu = tissuMapper.toEntity(request);
         tissu.setTypeTissu(typeTissu);
+        tissu.setCreatedAt(LocalDateTime.now());
+        tissu.setUpdatedAt(LocalDateTime.now());
 
         Tissu savedTissu = tissuRepository.save(tissu);
         return tissuMapper.toResponse(savedTissu);
@@ -76,6 +79,7 @@ public class TissuServiceImpl implements TissuService {
 
         tissuMapper.updateEntityFromRequest(request, tissu);
         tissu.setTypeTissu(typeTissu);
+        tissu.setUpdatedAt(LocalDateTime.now());
 
         Tissu updatedTissu = tissuRepository.save(tissu);
         return tissuMapper.toResponse(updatedTissu);

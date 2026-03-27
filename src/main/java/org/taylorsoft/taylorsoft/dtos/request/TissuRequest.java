@@ -19,7 +19,9 @@ public class TissuRequest {
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
 
-
+    //add pric metre
+    @NotNull(message = "Le prix par mètre est obligatoire")
+    private Double prixMetre;
 
     private Double largeur;
 

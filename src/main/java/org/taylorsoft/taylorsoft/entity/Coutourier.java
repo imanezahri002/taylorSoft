@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Coutourier extends User {
 
-
+    private Integer experience;
 }

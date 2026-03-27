@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.taylorsoft.taylorsoft.entity.enums.CoutourierOrderStatus;
 
 import java.util.List;
 
@@ -16,9 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CoutourierOrderRequest {
-
-    @NotNull(message = "Le statut est obligatoire")
-    private CoutourierOrderStatus status;
 
     @NotNull(message = "L'ID du couturier est obligatoire")
     private Long couturierId;
