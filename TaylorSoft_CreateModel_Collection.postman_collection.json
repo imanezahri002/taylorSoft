@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "12345678-1234-1234-1234-123456789012",
+    "name": "TaylorSoft - Create Model API",
+    "description": "Collection pour tester la création de modèles avec images",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Authentification",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set(\"jwt_token\", jsonData.token);",
+                  "    console.log('Token saved: ' + jsonData.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Create Model - Djellaba Premium",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "data",
+              "value": "{\n  \"nom\": \"Djellaba Premium\",\n  \"description\": \"Djellaba traditionnelle de luxe avec finitions premium et broderies\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 4,\n  \"prix\": 350.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"ordre\": \"PREMIER\",\n      \"photos\": [\n        {\n          \"photoUrl\": \"djellaba-rouge-1.jpg\",\n          \"principal\": true,\n          \"photoOrder\": 1\n        },\n        {\n          \"photoUrl\": \"djellaba-rouge-2.jpg\",\n          \"principal\": false,\n          \"photoOrder\": 2\n        },\n        {\n          \"photoUrl\": \"djellaba-rouge-3.jpg\",\n          \"principal\": false,\n          \"photoOrder\": 3\n        }\n      ]\n    },\n    {\n      \"couleurId\": 2,\n      \"ordre\": \"DEUXIEME\",\n      \"photos\": [\n        {\n          \"photoUrl\": \"djellaba-bleu-1.jpg\",\n          \"principal\": true,\n          \"photoOrder\": 1\n        },\n        {\n          \"photoUrl\": \"djellaba-bleu-2.jpg\",\n          \"principal\": false,\n          \"photoOrder\": 2\n        }\n      ]\n    }\n  ]\n}",
+              "type": "text"
+            },
+            {
+              "key": "files",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/models",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "models"
+          ]
+        }
+      }
+    },
+    {
+      "name": "3. Create Model - Djellaba Classique",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "data",
+              "value": "{\n  \"nom\": \"Djellaba Classique\",\n  \"description\": \"Djellaba traditionnelle simple et élégante\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 4,\n  \"prix\": 250.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 3,\n      \"ordre\": \"PREMIER\",\n      \"photos\": [\n        {\n          \"photoUrl\": \"djellaba-vert-1.jpg\",\n          \"principal\": true,\n          \"photoOrder\": 1\n        }\n      ]\n    }\n  ]\n}",
+              "type": "text"
+            },
+            {
+              "key": "files",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/models",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "models"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4. Create Model - Takchita Royale",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "data",
+              "value": "{\n  \"nom\": \"Takchita Royale\",\n  \"description\": \"Takchita traditionnelle avec voile assorti, idéale pour les occasions spéciales\",\n  \"tissuId\": 2,\n  \"categorieId\": 2,\n  \"couturierId\": 4,\n  \"prix\": 550.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"ordre\": \"PREMIER\",\n      \"photos\": [\n        {\n          \"photoUrl\": \"takchita-rouge-1.jpg\",\n          \"principal\": true,\n          \"photoOrder\": 1\n        },\n        {\n          \"photoUrl\": \"takchita-rouge-2.jpg\",\n          \"principal\": false,\n          \"photoOrder\": 2\n        },\n        {\n          \"photoUrl\": \"takchita-rouge-3.jpg\",\n          \"principal\": false,\n          \"photoOrder\": 3\n        },\n        {\n          \"photoUrl\": \"takchita-rouge-4.jpg\",\n          \"principal\": false,\n          \"photoOrder\": 4\n        }\n      ]\n    },\n    {\n      \"couleurId\": 4,\n      \"ordre\": \"DEUXIEME\",\n      \"photos\": [\n        {\n          \"photoUrl\": \"takchita-or-1.jpg\",\n          \"principal\": true,\n          \"photoOrder\": 1\n        },\n        {\n          \"photoUrl\": \"takchita-or-2.jpg\",\n          \"principal\": false,\n          \"photoOrder\": 2\n        }\n      ]\n    },\n    {\n      \"couleurId\": 5,\n      \"ordre\": \"TROISIEME\",\n      \"photos\": [\n        {\n          \"photoUrl\": \"takchita-blanc-1.jpg\",\n          \"principal\": true,\n          \"photoOrder\": 1\n        }\n      ]\n    }\n  ]\n}",
+              "type": "text"
+            },
+            {
+              "key": "files",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/models",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "models"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. Create Model - Caftan Marocain",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "data",
+              "value": "{\n  \"nom\": \"Caftan Marocain\",\n  \"description\": \"Caftan traditionnel avec broderies dorées\",\n  \"tissuId\": 1,\n  \"categorieId\": 1,\n  \"couturierId\": 4,\n  \"prix\": 400.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 1,\n      \"ordre\": \"PREMIER\",\n      \"photos\": [\n        {\n          \"photoUrl\": \"caftan-rouge-1.jpg\",\n          \"principal\": true,\n          \"photoOrder\": 1\n        },\n        {\n          \"photoUrl\": \"caftan-rouge-2.jpg\",\n          \"principal\": false,\n          \"photoOrder\": 2\n        }\n      ]\n    }\n  ]\n}",
+              "type": "text"
+            },
+            {
+              "key": "files",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/models",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "models"
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. Create Model - Abaya Moderne",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "data",
+              "value": "{\n  \"nom\": \"Abaya Moderne\",\n  \"description\": \"Abaya contemporaine avec détails sophistiqués\",\n  \"tissuId\": 3,\n  \"categorieId\": 3,\n  \"couturierId\": 4,\n  \"prix\": 300.00,\n  \"active\": true,\n  \"couleurs\": [\n    {\n      \"couleurId\": 6,\n      \"ordre\": \"PREMIER\",\n      \"photos\": [\n        {\n          \"photoUrl\": \"abaya-noir-1.jpg\",\n          \"principal\": true,\n          \"photoOrder\": 1\n        }\n      ]\n    }\n  ]\n}",
+              "type": "text"
+            },
+            {
+              "key": "files",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/models",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "models"
+          ]
+        }
+      }
+    },
+    {
+      "name": "7. Get All Models",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/models",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "models"
+          ]
+        }
+      }
+    },
+    {
+      "name": "8. Get Model by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/models/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "models",
+            "1"
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
+

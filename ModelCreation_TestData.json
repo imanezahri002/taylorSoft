@@ -1,0 +1,317 @@
+{
+  "exemples": [
+    {
+      "nom": "Djellaba Premium",
+      "description": "Djellaba traditionnelle de luxe avec finitions premium et broderies",
+      "tissuId": 1,
+      "categorieId": 1,
+      "couturierId": 4,
+      "prix": 350.00,
+      "active": true,
+      "couleurs": [
+        {
+          "couleurId": 1,
+          "ordre": "PREMIER",
+          "photos": [
+            {
+              "photoUrl": "djellaba-rouge-1.jpg",
+              "principal": true,
+              "photoOrder": 1
+            },
+            {
+              "photoUrl": "djellaba-rouge-2.jpg",
+              "principal": false,
+              "photoOrder": 2
+            },
+            {
+              "photoUrl": "djellaba-rouge-3.jpg",
+              "principal": false,
+              "photoOrder": 3
+            }
+          ]
+        },
+        {
+          "couleurId": 2,
+          "ordre": "DEUXIEME",
+          "photos": [
+            {
+              "photoUrl": "djellaba-bleu-1.jpg",
+              "principal": true,
+              "photoOrder": 1
+            },
+            {
+              "photoUrl": "djellaba-bleu-2.jpg",
+              "principal": false,
+              "photoOrder": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "Djellaba Classique",
+      "description": "Djellaba traditionnelle simple et élégante",
+      "tissuId": 1,
+      "categorieId": 1,
+      "couturierId": 4,
+      "prix": 250.00,
+      "active": true,
+      "couleurs": [
+        {
+          "couleurId": 3,
+          "ordre": "PREMIER",
+          "photos": [
+            {
+              "photoUrl": "djellaba-vert-1.jpg",
+              "principal": true,
+              "photoOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "Takchita Royale",
+      "description": "Takchita traditionnelle avec voile assorti, idéale pour les occasions spéciales",
+      "tissuId": 2,
+      "categorieId": 2,
+      "couturierId": 4,
+      "prix": 550.00,
+      "active": true,
+      "couleurs": [
+        {
+          "couleurId": 1,
+          "ordre": "PREMIER",
+          "photos": [
+            {
+              "photoUrl": "takchita-rouge-1.jpg",
+              "principal": true,
+              "photoOrder": 1
+            },
+            {
+              "photoUrl": "takchita-rouge-2.jpg",
+              "principal": false,
+              "photoOrder": 2
+            },
+            {
+              "photoUrl": "takchita-rouge-3.jpg",
+              "principal": false,
+              "photoOrder": 3
+            },
+            {
+              "photoUrl": "takchita-rouge-4.jpg",
+              "principal": false,
+              "photoOrder": 4
+            }
+          ]
+        },
+        {
+          "couleurId": 4,
+          "ordre": "DEUXIEME",
+          "photos": [
+            {
+              "photoUrl": "takchita-or-1.jpg",
+              "principal": true,
+              "photoOrder": 1
+            },
+            {
+              "photoUrl": "takchita-or-2.jpg",
+              "principal": false,
+              "photoOrder": 2
+            }
+          ]
+        },
+        {
+          "couleurId": 5,
+          "ordre": "TROISIEME",
+          "photos": [
+            {
+              "photoUrl": "takchita-blanc-1.jpg",
+              "principal": true,
+              "photoOrder": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "Caftan Marocain",
+      "description": "Caftan traditionnel avec broderies dorées",
+      "tissuId": 1,
+      "categorieId": 1,
+      "couturierId": 4,
+      "prix": 400.00,
+      "active": true,
+      "couleurs": [
+        {
+          "couleurId": 1,
+          "ordre": "PREMIER",
+          "photos": [
+            {
+              "photoUrl": "caftan-rouge-1.jpg",
+              "principal": true,
+              "photoOrder": 1
+            },
+            {
+              "photoUrl": "caftan-rouge-2.jpg",
+              "principal": false,
+              "photoOrder": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "Abaya Moderne",
+      "description": "Abaya contemporaine avec détails sophistiqués",
+      "tissuId": 3,
+      "categorieId": 3,
+      "couturierId": 4,
+      "prix": 300.00,
+      "active": true,
+      "couleurs": [
+        {
+          "couleurId": 6,
+          "ordre": "PREMIER",
+          "photos": [
+            {
+              "photoUrl": "abaya-noir-1.jpg",
+              "principal": true,
+              "photoOrder": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "endpoint": "POST /api/models",
+    "content_type": "multipart/form-data",
+    "parametres": {
+      "data": {
+        "type": "text/json",
+        "description": "Objet ModelRequest au format JSON",
+        "obligatoire": true
+      },
+      "files": {
+        "type": "multipart/form-data",
+        "description": "List de fichiers images (.jpg, .png, .gif, .webp)",
+        "obligatoire": true
+      }
+    },
+    "champs_obligatoires": [
+      "nom",
+      "description",
+      "tissuId",
+      "categorieId",
+      "couturierId",
+      "prix",
+      "couleurs",
+      "couleurs[].couleurId",
+      "couleurs[].ordre",
+      "couleurs[].photos",
+      "couleurs[].photos[].photoUrl",
+      "couleurs[].photos[].principal",
+      "couleurs[].photos[].photoOrder"
+    ],
+    "validations": {
+      "nom": "Non vide, max 100 caractères",
+      "description": "Non vide, max 100 caractères",
+      "tissuId": "ID existant",
+      "categorieId": "ID existant",
+      "couturierId": "ID existant",
+      "prix": "Nombre positif",
+      "active": "Boolean (true/false)",
+      "couleurId": "ID existant",
+      "ordre": "PREMIER, DEUXIEME, TROISIEME, QUATRIEME...",
+      "photoUrl": "Nom du fichier téléchargé",
+      "principal": "Boolean - au moins une photo doit être true",
+      "photoOrder": "Nombre 1-4"
+    }
+  },
+  "comment_utiliser_dans_postman": {
+    "etape_1": "Créer une nouvelle requête POST",
+    "etape_2": "URL: http://localhost:8080/api/models",
+    "etape_3": "Headers: Authorization: Bearer {jwt_token}",
+    "etape_4": "Body → form-data",
+    "etape_5": "Ajouter un champ 'data' (type: text) avec un des exemples JSON ci-dessus",
+    "etape_6": "Ajouter un champ 'files' (type: file) et sélectionner les images",
+    "etape_7": "Cliquer Send"
+  },
+  "ids_valides_exemples": {
+    "tissuId": [1, 2, 3],
+    "categorieId": [1, 2, 3],
+    "couturierId": [4],
+    "couleurId": [1, 2, 3, 4, 5, 6]
+  },
+  "formats_images_acceptes": [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".webp"
+  ],
+  "reponse_attendue": {
+    "code": 201,
+    "body": {
+      "id": "Long",
+      "nom": "String",
+      "description": "String",
+      "prix": "Double",
+      "active": "Boolean",
+      "visibility": "Boolean",
+      "modelColors": [
+        {
+          "id": "Long",
+          "ordre": "Enum",
+          "couleur": {
+            "id": "Long",
+            "nom": "String",
+            "codeHex": "String"
+          },
+          "photos": [
+            {
+              "id": "Long",
+              "photoUrl": "String (URL S3)",
+              "principal": "Boolean",
+              "photoOrder": "Integer"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "erreurs_courantes": [
+    {
+      "erreur": "400 Bad Request",
+      "cause": "Données JSON invalides dans le champ 'data'",
+      "solution": "Vérifier la syntaxe JSON et les types de données"
+    },
+    {
+      "erreur": "401 Unauthorized",
+      "cause": "JWT token manquant ou invalide",
+      "solution": "Ajouter le header Authorization avec un token valide"
+    },
+    {
+      "erreur": "404 Not Found",
+      "cause": "ID inexistant (tissuId, categorieId, couturierId, couleurId)",
+      "solution": "Utiliser des IDs valides qui existent en base de données"
+    },
+    {
+      "erreur": "400 Validation Error - Au moins une couleur est obligatoire",
+      "cause": "Tableau 'couleurs' vide ou non défini",
+      "solution": "Ajouter au moins une couleur avec ses photos"
+    },
+    {
+      "erreur": "400 Validation Error - Les photos sont obligatoires",
+      "cause": "Tableau 'photos' vide ou non défini",
+      "solution": "Ajouter au moins une photo par couleur"
+    },
+    {
+      "erreur": "500 Internal Server Error",
+      "cause": "Erreur lors de l'upload des fichiers S3",
+      "solution": "Vérifier la configuration S3 et les permissions"
+    }
+  ]
+}
+

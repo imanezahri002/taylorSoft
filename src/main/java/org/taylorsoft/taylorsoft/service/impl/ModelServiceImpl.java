@@ -3,6 +3,7 @@ package org.taylorsoft.taylorsoft.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.taylorsoft.taylorsoft.dtos.request.ModelColorRequest;
 import org.taylorsoft.taylorsoft.dtos.request.ModelPhotoRequest;
 import org.taylorsoft.taylorsoft.dtos.request.ModelRequest;
@@ -31,34 +32,46 @@ public class ModelServiceImpl implements ModelService {
     private final CouleurRepository couleurRepository;
     private final CategorieRepository categorieRepository;
     private final ModelMapper modelMapper;
+    private final S3Service s3Service;
 
     @Override
-    public ModelResponse create(ModelRequest request) {
-        // 1. Vérifier que le tissu existe
+    public ModelResponse create(ModelRequest request, List<MultipartFile> files) {
+
+        // 1. Vérifications (inchangé)
         Tissu tissu = tissuRepository.findById(request.getTissuId())
-                .orElseThrow(() -> new ResourceNotFoundException("Tissu non trouvé avec l'ID: " + request.getTissuId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Tissu non trouvé"));
 
-        // 2. Vérifier que le couturier existe
         Coutourier coutourier = coutourierRepository.findById(request.getCouturierId())
-                .orElseThrow(() -> new ResourceNotFoundException("Couturier non trouvé avec l'ID: " + request.getCouturierId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Couturier non trouvé"));
 
-        // 3. Vérifier que la catégorie existe
         Categorie categorie = categorieRepository.findById(request.getCategorieId())
-                .orElseThrow(() -> new ResourceNotFoundException("Catégorie non trouvée avec l'ID: " + request.getCategorieId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Catégorie non trouvée"));
 
-        // 4. Validation métier des couleurs et photos
+        // 2. Validation métier
         validateCouleursAndPhotos(request.getCouleurs());
 
-        // 5. Créer le modèle
+        // 3. Vérifier cohérence fichiers/photos
+        int totalPhotos = request.getCouleurs().stream()
+                .mapToInt(c -> c.getPhotos().size())
+                .sum();
+
+        if (files.size() != totalPhotos) {
+            throw new RuntimeException("Nombre de fichiers invalide");
+        }
+
+        // 4. Création Model
         Model model = modelMapper.toEntity(request);
         model.setTissu(tissu);
         model.setCoutourier(coutourier);
         model.setCategorie(categorie);
 
-        // 6. Créer les couleurs et photos
+        int fileIndex = 0;
+
+        // 5. Création couleurs + photos
         for (ModelColorRequest colorRequest : request.getCouleurs()) {
+
             Couleur couleur = couleurRepository.findById(colorRequest.getCouleurId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Couleur non trouvée avec l'ID: " + colorRequest.getCouleurId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Couleur non trouvée"));
 
             ModelColor modelColor = new ModelColor();
             modelColor.setModel(model);
@@ -66,10 +79,16 @@ public class ModelServiceImpl implements ModelService {
             modelColor.setPhotos(new ArrayList<>());
 
             for (ModelPhotoRequest photoRequest : colorRequest.getPhotos()) {
+
+                MultipartFile file = files.get(fileIndex++);
+
+                // 🔥 Upload S3
+                String url = s3Service.uploadFile(file,"models");
+
                 ModelPhoto photo = new ModelPhoto();
-                photo.setPhotoUrl(photoRequest.getPhotoUrl());
+                photo.setPhotoUrl(url); // URL S3
                 photo.setPrincipal(photoRequest.getPrincipal());
-                photo.setOrder(photoRequest.getOrder());
+                photo.setOrder(photoRequest.getPhoto_order());
                 photo.setModelColor(modelColor);
 
                 modelColor.getPhotos().add(photo);
@@ -78,7 +97,7 @@ public class ModelServiceImpl implements ModelService {
             model.getModelColors().add(modelColor);
         }
 
-        // 7. UN SEUL SAVE - Cascade automatique
+        // 6. Sauvegarde (cascade)
         Model savedModel = modelRepository.save(model);
 
         return modelMapper.toResponse(savedModel);
@@ -100,61 +119,61 @@ public class ModelServiceImpl implements ModelService {
         return modelMapper.toResponse(model);
     }
 
-    @Override
-    public ModelResponse update(Long id, ModelRequest request) {
-        Model model = modelRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Modèle non trouvé avec l'ID: " + id));
 
-        // Vérifications
-        Tissu tissu = tissuRepository.findById(request.getTissuId())
-                .orElseThrow(() -> new ResourceNotFoundException("Tissu non trouvé avec l'ID: " + request.getTissuId()));
-
-        Coutourier coutourier = coutourierRepository.findById(request.getCouturierId())
-                .orElseThrow(() -> new ResourceNotFoundException("Couturier non trouvé avec l'ID: " + request.getCouturierId()));
-
-        Categorie categorie = categorieRepository.findById(request.getCategorieId())
-                .orElseThrow(() -> new ResourceNotFoundException("Catégorie non trouvée avec l'ID: " + request.getCategorieId()));
-
-        // Validation
-        validateCouleursAndPhotos(request.getCouleurs());
-
-        // Mettre à jour
-        modelMapper.updateEntityFromRequest(request, model);
-        model.setTissu(tissu);
-        model.setCoutourier(coutourier);
-        model.setCategorie(categorie);
-
-        // Supprimer les anciennes couleurs (orphanRemoval supprime les photos)
-        model.getModelColors().clear();
-
-        // Créer les nouvelles couleurs et photos
-        for (ModelColorRequest couleurRequest : request.getCouleurs()) {
-            Couleur couleur = couleurRepository.findById(couleurRequest.getCouleurId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Couleur non trouvée avec l'ID: " + couleurRequest.getCouleurId()));
-
-            ModelColor modelColor = new ModelColor();
-            modelColor.setModel(model);
-            modelColor.setCouleur(couleur);
-            modelColor.setPhotos(new ArrayList<>());
-
-            for (ModelPhotoRequest photoRequest : couleurRequest.getPhotos()) {
-                ModelPhoto photo = new ModelPhoto();
-                photo.setPhotoUrl(photoRequest.getPhotoUrl());
-                photo.setPrincipal(photoRequest.getPrincipal());
-                photo.setOrder(photoRequest.getOrder());
-                photo.setModelColor(modelColor);
-
-                modelColor.getPhotos().add(photo);
-            }
-
-            model.getModelColors().add(modelColor);
-        }
-
-        // UN SEUL SAVE
-        Model updatedModel = modelRepository.save(model);
-
-        return modelMapper.toResponse(updatedModel);
-    }
+//    public ModelResponse update(Long id, ModelRequest request) {
+//        Model model = modelRepository.findById(id)
+//                .orElseThrow(() -> new ResourceNotFoundException("Modèle non trouvé avec l'ID: " + id));
+//
+//        // Vérifications
+//        Tissu tissu = tissuRepository.findById(request.getTissuId())
+//                .orElseThrow(() -> new ResourceNotFoundException("Tissu non trouvé avec l'ID: " + request.getTissuId()));
+//
+//        Coutourier coutourier = coutourierRepository.findById(request.getCouturierId())
+//                .orElseThrow(() -> new ResourceNotFoundException("Couturier non trouvé avec l'ID: " + request.getCouturierId()));
+//
+//        Categorie categorie = categorieRepository.findById(request.getCategorieId())
+//                .orElseThrow(() -> new ResourceNotFoundException("Catégorie non trouvée avec l'ID: " + request.getCategorieId()));
+//
+//        // Validation
+//        validateCouleursAndPhotos(request.getCouleurs());
+//
+//        // Mettre à jour
+//        modelMapper.updateEntityFromRequest(request, model);
+//        model.setTissu(tissu);
+//        model.setCoutourier(coutourier);
+//        model.setCategorie(categorie);
+//
+//        // Supprimer les anciennes couleurs (orphanRemoval supprime les photos)
+//        model.getModelColors().clear();
+//
+//        // Créer les nouvelles couleurs et photos
+//        for (ModelColorRequest couleurRequest : request.getCouleurs()) {
+//            Couleur couleur = couleurRepository.findById(couleurRequest.getCouleurId())
+//                    .orElseThrow(() -> new ResourceNotFoundException("Couleur non trouvée avec l'ID: " + couleurRequest.getCouleurId()));
+//
+//            ModelColor modelColor = new ModelColor();
+//            modelColor.setModel(model);
+//            modelColor.setCouleur(couleur);
+//            modelColor.setPhotos(new ArrayList<>());
+//
+//            for (ModelPhotoRequest photoRequest : couleurRequest.getPhotos()) {
+//                ModelPhoto photo = new ModelPhoto();
+//                photo.setPhotoUrl(photoRequest.getPhotoUrl());
+//                photo.setPrincipal(photoRequest.getPrincipal());
+//                photo.setOrder(photoRequest.getOrder());
+//                photo.setModelColor(modelColor);
+//
+//                modelColor.getPhotos().add(photo);
+//            }
+//
+//            model.getModelColors().add(modelColor);
+//        }
+//
+//        // UN SEUL SAVE
+//        Model updatedModel = modelRepository.save(model);
+//
+//        return modelMapper.toResponse(updatedModel);
+//    }
 
     @Override
     public void delete(Long id) {

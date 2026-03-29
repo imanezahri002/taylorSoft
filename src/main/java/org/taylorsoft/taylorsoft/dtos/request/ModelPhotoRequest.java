@@ -14,13 +14,10 @@ import org.taylorsoft.taylorsoft.entity.enums.Ordre;
 @AllArgsConstructor
 public class ModelPhotoRequest {
 
-    @NotBlank(message = "L'URL de la photo est obligatoire")
-    private String photoUrl;
-
     @NotNull(message = "L'indicateur principal est obligatoire")
     private Boolean principal;
 
     @NotNull
-    private Ordre order;
+    private Ordre photo_order;
 }
 

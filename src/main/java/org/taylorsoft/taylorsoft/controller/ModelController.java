@@ -3,11 +3,16 @@ package org.taylorsoft.taylorsoft.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.taylorsoft.taylorsoft.dtos.request.ModelRequest;
 import org.taylorsoft.taylorsoft.dtos.response.ModelResponse;
 import org.taylorsoft.taylorsoft.service.ModelService;
+import org.taylorsoft.taylorsoft.service.impl.S3Service;
+import software.amazon.awssdk.thirdparty.jackson.core.JsonProcessingException;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
@@ -18,14 +23,26 @@ public class ModelController {
 
     private final ModelService modelService;
 
+
     /**
      * Créer un nouveau modèle avec ses couleurs et photos
      */
-    @PostMapping
-    public ResponseEntity<ModelResponse> create(@Valid @RequestBody ModelRequest request) {
-        ModelResponse response = modelService.create(request);
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ModelResponse> create(
+            @RequestPart("data") String jsonData,          // JSON brut
+            @RequestPart("files") List<MultipartFile> files
+    ) throws JsonProcessingException {
+
+        // Convertir JSON en ModelRequest
+        ObjectMapper mapper = new ObjectMapper();
+        ModelRequest request = mapper.readValue(jsonData, ModelRequest.class);
+
+        ModelResponse response = modelService.create(request, files);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
 
     /**
      * Récupérer tous les modèles
@@ -48,13 +65,13 @@ public class ModelController {
     /**
      * Mettre à jour un modèle
      */
-    @PutMapping("/{id}")
-    public ResponseEntity<ModelResponse> update(
-            @PathVariable Long id,
-            @Valid @RequestBody ModelRequest request) {
-        ModelResponse response = modelService.update(id, request);
-        return ResponseEntity.ok(response);
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<ModelResponse> update(
+//            @PathVariable Long id,
+//            @Valid @RequestBody ModelRequest request) {
+//        ModelResponse response = modelService.update(id, request);
+//        return ResponseEntity.ok(response);
+//    }
 
     /**
      * Supprimer un modèle
