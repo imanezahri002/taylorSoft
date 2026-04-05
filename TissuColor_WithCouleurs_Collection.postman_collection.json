@@ -1,0 +1,270 @@
+{
+  "info": {
+    "_postman_id": "tissucolor-with-couleurs-collection",
+    "name": "TissuColor With Couleurs",
+    "description": "Collection pour tester la récupération de tous les tissus avec leurs couleurs et images",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Tissus With Couleurs",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color/all-tissus/with-couleurs",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color",
+            "all-tissus",
+            "with-couleurs"
+          ]
+        },
+        "description": "Récupère tous les tissus avec leurs couleurs et images\n\nCette endpoint retourne une liste de TissuColorResponse contenant:\n- Les infos du tissu (id, reference, nom)\n- Les infos de la couleur (id, nom, code hex)\n- La photo de la couleur\n- Le statut actif/inactif"
+      },
+      "response": []
+    },
+    {
+      "name": "Get All TissuColor",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color"
+          ]
+        },
+        "description": "Récupère tous les TissuColor (ancienne méthode pour comparaison)"
+      },
+      "response": []
+    },
+    {
+      "name": "Get TissuColor By Tissu ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color/tissu/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color",
+            "tissu",
+            "1"
+          ]
+        },
+        "description": "Récupère les couleurs pour un tissu spécifique (ID=1)"
+      },
+      "response": []
+    },
+    {
+      "name": "Get TissuColor By Couleur ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color/couleur/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color",
+            "couleur",
+            "1"
+          ]
+        },
+        "description": "Récupère les tissus pour une couleur spécifique (ID=1)"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Active TissuColor Only",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color/active",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color",
+            "active"
+          ]
+        },
+        "description": "Récupère seulement les TissuColor actifs"
+      },
+      "response": []
+    },
+    {
+      "name": "Get TissuColor By ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color",
+            "1"
+          ]
+        },
+        "description": "Récupère un TissuColor spécifique par ID (ID=1)"
+      },
+      "response": []
+    },
+    {
+      "name": "Create TissuColor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tissuId\": 1,\n  \"couleurId\": 1,\n  \"photo\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\",\n  \"prixUnitaire\": 50.0,\n  \"active\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color"
+          ]
+        },
+        "description": "Crée un nouveau TissuColor"
+      },
+      "response": []
+    },
+    {
+      "name": "Update TissuColor",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tissuId\": 1,\n  \"couleurId\": 2,\n  \"photo\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==\",\n  \"prixUnitaire\": 55.0,\n  \"active\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color",
+            "1"
+          ]
+        },
+        "description": "Met à jour un TissuColor existant (ID=1)"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete TissuColor",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/tissu-color/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "tissu-color",
+            "1"
+          ]
+        },
+        "description": "Supprime un TissuColor (ID=1)"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
+

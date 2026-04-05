@@ -117,6 +117,28 @@ public class TissuColorServiceImpl implements TissuColorService {
                 .map(tissuColorMapper::toResponse)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Récupère tous les tissus avec leurs couleurs et images
+     * Pour chaque tissu, retourne toutes ses couleurs avec code hex et photo
+     * @return Liste de TissuColorResponse avec tous les tissus et leurs couleurs
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<TissuColorResponse> getAllTissusWithCouleurs() {
+        // Récupérer tous les tissus
+        List<Tissu> allTissus = tissuRepository.findAll();
+
+        // Pour chaque tissu, récupérer ses couleurs avec images
+        List<TissuColorResponse> result = new java.util.ArrayList<>();
+
+        for (Tissu tissu : allTissus) {
+            List<TissuColor> couleursForTissu = tissuColorRepository.findByTissuId(tissu.getId());
+
+            for (TissuColor tissuColor : couleursForTissu) {
+                result.add(tissuColorMapper.toResponse(tissuColor));
+            }
+        }
+        return result;
+    }
 }
-
-

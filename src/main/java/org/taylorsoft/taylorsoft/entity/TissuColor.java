@@ -17,7 +17,7 @@ public class TissuColor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false ,length = 5000000)
     private String photo;
 
     private boolean active;

@@ -18,6 +18,9 @@ public class CorsConfig {
         // ✅ Autorise ces origines (frontend Angular)
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:4200",
+                "http://localhost:49673",
+                "http://localhost:63485",
+                "http://localhost:61674",
                 "http://localhost:56617",
                 "http://localhost:58577",
                 "http://localhost:49773",

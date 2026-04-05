@@ -21,6 +21,7 @@ public interface TissuColorMapper {
     @Mapping(source = "tissu.id", target = "tissuId")
     @Mapping(source = "tissu.reference", target = "tissuReference")
     @Mapping(source = "tissu.nom", target = "tissuNom")
+    @Mapping(source = "tissu.prixMetre", target = "prixMetre")
     TissuColorResponse toResponse(TissuColor tissuColor);
 
     @Mapping(target = "id", ignore = true)

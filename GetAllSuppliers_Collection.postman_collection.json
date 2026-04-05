@@ -1,0 +1,134 @@
+{
+  "info": {
+    "name": "Get All Suppliers (Fournisseurs)",
+    "description": "Collection pour tester la récupération de tous les fournisseurs avec toutes leurs informations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Suppliers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/admin/users/suppliers/all",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "admin", "users", "suppliers", "all"]
+        },
+        "description": "Récupère tous les fournisseurs avec toutes leurs informations (données de User + Fournisseur)"
+      },
+      "response": [
+        {
+          "name": "Success Response Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/users/suppliers/all",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "users", "suppliers", "all"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": 1,\n    \"email\": \"fournisseur1@example.com\",\n    \"role\": \"FOURNISSEUR\",\n    \"statut\": \"ACTIF\",\n    \"nom\": \"Martin\",\n    \"prenom\": \"Sophie\",\n    \"telephone\": \"0601234567\",\n    \"profilePicture\": null,\n    \"adresse\": \"456 Boulevard du Commerce, 75002 Paris\",\n    \"nomEntreprise\": \"Textile Solutions SARL\",\n    \"registreCommerce\": \"12345678\",\n    \"ice\": \"001234567890000\",\n    \"siteWeb\": \"https://www.textiles.com\",\n    \"description\": \"Fournisseur spécialisé dans les tissus de haute qualité\"\n  },\n  {\n    \"id\": 2,\n    \"email\": \"fournisseur2@example.com\",\n    \"role\": \"FOURNISSEUR\",\n    \"statut\": \"ACTIF\",\n    \"nom\": \"Dubois\",\n    \"prenom\": \"Pierre\",\n    \"telephone\": \"0602345678\",\n    \"profilePicture\": null,\n    \"adresse\": \"789 Rue du Textile, 69000 Lyon\",\n    \"nomEntreprise\": \"Fabrics Premium EIRL\",\n    \"registreCommerce\": \"87654321\",\n    \"ice\": \"002345678901111\",\n    \"siteWeb\": \"https://www.fabrics-premium.fr\",\n    \"description\": \"Fournisseur de tissus écologiques et durables\"\n  }\n]\n"
+        }
+      ]
+    },
+    {
+      "name": "Create Fournisseur (For Testing)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"fournisseur_test@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"role\": \"FOURNISSEUR\",\n  \"nom\": \"TestFournisseur\",\n  \"prenom\": \"Test\",\n  \"telephone\": \"0612345678\",\n  \"adresse\": \"123 Rue des Tissus, 75001 Paris\",\n  \"nomEntreprise\": \"Textile Solutions SARL\",\n  \"registreCommerce\": \"12345678\",\n  \"ice\": \"001234567890000\",\n  \"siteWeb\": \"https://www.textiles.com\",\n  \"description\": \"Fournisseur spécialisé dans les tissus de haute qualité\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "admin", "users"]
+        },
+        "description": "Crée un nouveau fournisseur pour tester la récupération"
+      }
+    },
+    {
+      "name": "Get All Users with Pagination",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/admin/users?page=0&size=10",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "admin", "users"],
+          "query": [
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Récupère tous les utilisateurs avec pagination (pas seulement les fournisseurs)"
+      }
+    },
+    {
+      "name": "Get User by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/admin/users/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "admin", "users", "1"]
+        },
+        "description": "Récupère un utilisateur spécifique par son ID"
+      }
+    }
+  ]
+}
+

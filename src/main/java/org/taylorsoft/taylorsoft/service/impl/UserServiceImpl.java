@@ -7,13 +7,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.taylorsoft.taylorsoft.dtos.request.UserRequest;
+import org.taylorsoft.taylorsoft.dtos.response.FournisseurResponse;
 import org.taylorsoft.taylorsoft.dtos.response.UserResponse;
+import org.taylorsoft.taylorsoft.entity.Fournisseur;
 import org.taylorsoft.taylorsoft.entity.User;
+import org.taylorsoft.taylorsoft.entity.enums.Role;
 import org.taylorsoft.taylorsoft.exception.DuplicateResourceException;
 import org.taylorsoft.taylorsoft.exception.ResourceNotFoundException;
 import org.taylorsoft.taylorsoft.mapper.UserMapper;
+import org.taylorsoft.taylorsoft.repository.FournisseurRepository;
 import org.taylorsoft.taylorsoft.repository.UserRepository;
 import org.taylorsoft.taylorsoft.service.UserService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +28,7 @@ import org.taylorsoft.taylorsoft.service.UserService;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final FournisseurRepository fournisseurRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -77,6 +85,35 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll(pageable).map(userMapper::userToResponse);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<FournisseurResponse> getAllSuppliers() {
+        return fournisseurRepository.findAll().stream()
+                .map(this::convertFournisseurToResponse)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Convertit une entité Fournisseur en FournisseurResponse
+     */
+    private FournisseurResponse convertFournisseurToResponse(Fournisseur fournisseur) {
+        return FournisseurResponse.builder()
+                .id(fournisseur.getId())
+                .email(fournisseur.getEmail())
+                .role(fournisseur.getRole())
+                .statut(fournisseur.getStatut())
+                .nom(fournisseur.getNom())
+                .prenom(fournisseur.getPrenom())
+                .telephone(fournisseur.getTelephone())
+                .profilePicture(fournisseur.getProfilePicture())
+                .adresse(fournisseur.getAdresse())
+                .nomEntreprise(fournisseur.getNomEntreprise())
+                .registreCommerce(fournisseur.getRegistreCommerce())
+                .ice(fournisseur.getIce())
+                .siteWeb(fournisseur.getSiteWeb())
+                .description(fournisseur.getDescription())
+                .build();
+    }
 
     @Override
     public void delete(Long id) {

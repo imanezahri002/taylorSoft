@@ -11,6 +11,7 @@ import org.taylorsoft.taylorsoft.exception.ResourceNotFoundException;
 import org.taylorsoft.taylorsoft.mapper.TissuMapper;
 import org.taylorsoft.taylorsoft.repository.TissuRepository;
 import org.taylorsoft.taylorsoft.repository.TypeTissuRepository;
+import org.taylorsoft.taylorsoft.repository.TissuColorRepository;
 import org.taylorsoft.taylorsoft.service.TissuService;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ public class TissuServiceImpl implements TissuService {
 
     private final TissuRepository tissuRepository;
     private final TypeTissuRepository typeTissuRepository;
+    private final TissuColorRepository tissuColorRepository;
     private final TissuMapper tissuMapper;
 
     @Override

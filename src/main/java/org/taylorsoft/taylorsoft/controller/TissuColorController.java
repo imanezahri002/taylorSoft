@@ -92,5 +92,14 @@ public class TissuColorController {
         List<TissuColorResponse> responses = tissuColorService.getActiveOnly();
         return ResponseEntity.ok(responses);
     }
-}
 
+    /**
+     * Récupérer tous les tissus avec leurs couleurs et images
+     * @return Liste de TissuColorResponse avec tous les tissus et leurs couleurs
+     */
+    @GetMapping("/all-tissus/with-couleurs")
+    public ResponseEntity<List<TissuColorResponse>> getAllTissusWithCouleurs() {
+        List<TissuColorResponse> responses = tissuColorService.getAllTissusWithCouleurs();
+        return ResponseEntity.ok(responses);
+    }
+}

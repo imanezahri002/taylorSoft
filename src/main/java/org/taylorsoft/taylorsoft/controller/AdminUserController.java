@@ -9,8 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.taylorsoft.taylorsoft.dtos.request.UserRequest;
+import org.taylorsoft.taylorsoft.dtos.response.FournisseurResponse;
 import org.taylorsoft.taylorsoft.dtos.response.UserResponse;
 import org.taylorsoft.taylorsoft.service.UserService;
+
+import java.util.List;
 
 /**
  * Contrôleur pour la gestion des utilisateurs (Admin only)
@@ -46,6 +49,14 @@ public class AdminUserController {
     @GetMapping
     public ResponseEntity<Page<UserResponse>> list(Pageable pageable) {
         return ResponseEntity.ok(userService.list(pageable));
+    }
+
+    /**
+     * Récupérer tous les fournisseurs
+     */
+    @GetMapping("/suppliers/all")
+    public ResponseEntity<List<FournisseurResponse>> getAllSuppliers() {
+        return ResponseEntity.ok(userService.getAllSuppliers());
     }
 
     /**

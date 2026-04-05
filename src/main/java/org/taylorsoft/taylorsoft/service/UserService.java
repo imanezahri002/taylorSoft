@@ -3,7 +3,10 @@ package org.taylorsoft.taylorsoft.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.taylorsoft.taylorsoft.dtos.request.UserRequest;
+import org.taylorsoft.taylorsoft.dtos.response.FournisseurResponse;
 import org.taylorsoft.taylorsoft.dtos.response.UserResponse;
+
+import java.util.List;
 
 /**
  * Service pour la gestion des utilisateurs
@@ -29,4 +32,9 @@ public interface UserService {
      * Supprimer un utilisateur par son identifiant
      */
     void delete(Long id);
+
+    /**
+     * Récupérer tous les fournisseurs avec toutes leurs informations
+     */
+    List<FournisseurResponse> getAllSuppliers();
 }

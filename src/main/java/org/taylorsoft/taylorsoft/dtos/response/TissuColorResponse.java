@@ -13,7 +13,6 @@ public class TissuColorResponse {
 
     private Long id;
     private String photo;
-    private Double prixUnitaire;
     private Boolean active;
 
     // Couleur
@@ -25,6 +24,7 @@ public class TissuColorResponse {
     private Long tissuId;
     private String tissuReference;
     private String tissuNom;
+    private Double prixMetre;
 }
 
 
