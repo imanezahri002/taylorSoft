@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9-eclipse-temurin-21'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     environment {
         PROJECT_NAME = 'TaylorSoft'
@@ -22,14 +17,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo '🔨 Compilation du projet...'
-                sh 'mvn clean package -DskipTests'
+                sh './mvnw clean package -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
                 echo '🧪 Exécution des tests...'
-                sh 'mvn test || true'
+                sh './mvnw test || true'
             }
         }
 
