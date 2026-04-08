@@ -143,7 +143,7 @@ pipeline {
 
     post {
         always {
-            node {
+            node('master') {
                 echo '📊 Rapport final du build'
                 script {
                     junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
@@ -178,7 +178,7 @@ pipeline {
         }
 
         cleanup {
-            node {
+            node('master') {
                 cleanWs()
             }
         }
