@@ -2,81 +2,136 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_NAME = 'TaylorSoft'
+        PROJECT_NAME = 'taylorsoft'
         IMAGE_TAG = "${BUILD_NUMBER}"
-        MAVEN_OPTS = '-DskipTests -Dorg.slf4j.simpleLogger.defaultLogLevel=warn'
+        REGISTRY = 'docker.io'
+        DOCKER_REGISTRY_CREDS = credentials('docker-registry-creds')
+        MAVEN_OPTS = '-Xmx1024m -Xms512m'
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        timeout(time: 1, unit: 'HOURS')
+        timestamps()
     }
 
     stages {
-        stage('Checkout') {
+        stage('🔍 Checkout') {
             steps {
                 echo '📦 Récupération du code source...'
                 checkout scm
+                script {
+                    env.GIT_COMMIT_MSG = sh(returnStdout: true, script: 'git log -1 --pretty=%B').trim()
+                    env.GIT_AUTHOR = sh(returnStdout: true, script: 'git log -1 --pretty=%an').trim()
+                    echo "✓ Branch: ${env.GIT_BRANCH}"
+                    echo "✓ Commit: ${env.GIT_COMMIT}"
+                    echo "✓ Author: ${env.GIT_AUTHOR}"
+                }
             }
         }
 
-        stage('Build') {
+        stage('🔨 Build') {
             steps {
-                echo '🔨 Compilation du projet...'
+                echo '🔨 Compilation du projet Maven...'
+                sh '''
+                    chmod +x ./mvnw
+                    ./mvnw clean package -DskipTests -q
+                    echo "✓ Build réussi"
+                '''
+            }
+        }
+
+        stage('🧪 Tests') {
+            steps {
+                echo '🧪 Exécution des tests unitaires...'
                 script {
                     try {
-                        sh 'chmod +x ./mvnw && ./mvnw clean package -DskipTests -q'
+                        sh './mvnw test -q'
+                        echo "✓ Tests réussis"
                     } catch (Exception e) {
-                        echo '⚠️ Build échoué mais poursuite du pipeline'
+                        echo "⚠️ Tests échoués mais poursuite du pipeline"
                         currentBuild.result = 'UNSTABLE'
                     }
                 }
             }
         }
 
-        stage('Archive Results') {
+        stage('📊 SonarQube Analysis') {
+            when {
+                expression { env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' }
+            }
             steps {
-                echo '📁 Archivage des artefacts...'
+                echo '📊 Analyse de qualité du code...'
                 script {
                     try {
                         sh '''
-                            if [ -d "target" ]; then
-                                echo "✓ Dossier target trouvé"
-                            else
-                                echo "⚠️ Dossier target non trouvé"
-                            fi
+                            ./mvnw sonar:sonar \
+                              -Dsonar.projectKey=taylorsoft \
+                              -Dsonar.host.url=http://sonarqube:9000 \
+                              -Dsonar.login=${SONARQUBE_TOKEN} || echo "SonarQube non disponible"
                         '''
                     } catch (Exception e) {
-                        echo "Artefacts non disponibles"
+                        echo "⚠️ SonarQube échoué"
                     }
                 }
             }
         }
 
-        stage('Build Docker Image') {
+        stage('📁 Archive Results') {
+            steps {
+                echo '📁 Archivage des artefacts...'
+                script {
+                    def jarExists = sh(script: 'test -f target/*.jar', returnStatus: true)
+                    if (jarExists == 0) {
+                        echo "✓ Artefact JAR trouvé"
+                    } else {
+                        echo "⚠️ Pas de JAR généré"
+                    }
+                }
+            }
+        }
+
+        stage('🐳 Build Docker Image') {
             when {
-                expression { fileExists('Dockerfile') }
+                expression { fileExists('Dockerfile') && (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop') }
             }
             steps {
                 echo '🐳 Construction de l\'image Docker...'
                 script {
                     try {
                         sh '''
-                            docker build -t ${PROJECT_NAME}:${IMAGE_TAG} . || echo "Docker build échoué"
+                            docker build \
+                              -t ${REGISTRY}/${PROJECT_NAME}:${IMAGE_TAG} \
+                              -t ${REGISTRY}/${PROJECT_NAME}:latest \
+                              -f Dockerfile .
+                            echo "✓ Image Docker créée: ${REGISTRY}/${PROJECT_NAME}:${IMAGE_TAG}"
                         '''
                     } catch (Exception e) {
-                        echo "Docker non disponible ou échec"
+                        echo "❌ Erreur Docker build"
+                        currentBuild.result = 'FAILURE'
                     }
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('🚀 Deploy') {
             when {
-                expression { fileExists('docker-compose.yml') }
+                expression { fileExists('docker-compose.yml') && env.BRANCH_NAME == 'master' }
             }
             steps {
-                echo '🚀 Déploiement...'
+                echo '🚀 Déploiement en Production...'
                 script {
                     try {
-                        sh 'docker-compose up -d || echo "Docker-compose échoué"'
+                        sh '''
+                            docker-compose down --remove-orphans || true
+                            docker-compose up -d
+                            sleep 10
+                            docker-compose ps
+                            echo "✓ Déploiement réussi"
+                        '''
                     } catch (Exception e) {
-                        echo "Docker-compose non disponible"
+                        echo "❌ Erreur déploiement"
+                        currentBuild.result = 'FAILURE'
                     }
                 }
             }
@@ -85,18 +140,40 @@ pipeline {
 
     post {
         always {
-            echo '📊 Rapport final'
-            junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
-            archiveArtifacts artifacts: '**/target/*.jar,**/target/*.war', allowEmptyArchive: true
+            echo '📊 Rapport final du build'
+            script {
+                junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
+                archiveArtifacts artifacts: '**/target/*.jar,**/target/*.war', allowEmptyArchive: true
+
+                def testSummary = sh(returnStdout: true, script: '''
+                    if [ -f "target/surefire-reports/index.html" ]; then
+                        grep -oP '(?<=Tests run: )\\d+' target/surefire-reports/index.html || echo "Tests: 0"
+                    else
+                        echo "Pas de rapport de tests"
+                    fi
+                ''').trim()
+
+                echo "Tests résumé: ${testSummary}"
+            }
         }
+
         success {
             echo '✅ Pipeline complété avec succès!'
+            echo "Build ${env.BUILD_NUMBER} - ${env.PROJECT_NAME}:${IMAGE_TAG}"
         }
+
         unstable {
             echo '⚠️ Pipeline complété avec des avertissements'
+            echo "Consultez les logs pour plus de détails"
         }
+
         failure {
             echo '❌ Pipeline échoué'
+            echo "Build ${env.BUILD_NUMBER} - Vérifiez les logs"
+        }
+
+        cleanup {
+            cleanWs()
         }
     }
 }
