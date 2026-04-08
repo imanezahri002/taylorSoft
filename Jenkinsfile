@@ -4,8 +4,7 @@ pipeline {
     environment {
         PROJECT_NAME = 'taylorsoft'
         IMAGE_TAG = "${BUILD_NUMBER}"
-        REGISTRY = 'docker.io'
-        DOCKER_REGISTRY_CREDS = credentials('docker-registry-creds')
+        REGISTRY = 'localhost:5000'
         MAVEN_OPTS = '-Xmx1024m -Xms512m'
     }
 
@@ -58,7 +57,9 @@ pipeline {
 
         stage('📊 SonarQube Analysis') {
             when {
-                expression { env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' }
+                expression {
+                    env.GIT_BRANCH == 'origin/master' || env.GIT_BRANCH == 'origin/develop'
+                }
             }
             steps {
                 echo '📊 Analyse de qualité du code...'
@@ -93,7 +94,9 @@ pipeline {
 
         stage('🐳 Build Docker Image') {
             when {
-                expression { fileExists('Dockerfile') && (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop') }
+                expression {
+                    fileExists('Dockerfile') && (env.GIT_BRANCH == 'origin/master' || env.GIT_BRANCH == 'origin/develop')
+                }
             }
             steps {
                 echo '🐳 Construction de l\'image Docker...'
@@ -116,7 +119,7 @@ pipeline {
 
         stage('🚀 Deploy') {
             when {
-                expression { fileExists('docker-compose.yml') && env.BRANCH_NAME == 'master' }
+                expression { fileExists('docker-compose.yml') && env.GIT_BRANCH == 'origin/master' }
             }
             steps {
                 echo '🚀 Déploiement en Production...'
@@ -140,20 +143,22 @@ pipeline {
 
     post {
         always {
-            echo '📊 Rapport final du build'
-            script {
-                junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
-                archiveArtifacts artifacts: '**/target/*.jar,**/target/*.war', allowEmptyArchive: true
+            node {
+                echo '📊 Rapport final du build'
+                script {
+                    junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
+                    archiveArtifacts artifacts: '**/target/*.jar,**/target/*.war', allowEmptyArchive: true
 
-                def testSummary = sh(returnStdout: true, script: '''
-                    if [ -f "target/surefire-reports/index.html" ]; then
-                        grep -oP '(?<=Tests run: )\\d+' target/surefire-reports/index.html || echo "Tests: 0"
-                    else
-                        echo "Pas de rapport de tests"
-                    fi
-                ''').trim()
+                    def testSummary = sh(returnStdout: true, script: '''
+                        if [ -f "target/surefire-reports/index.html" ]; then
+                            grep -oP '(?<=Tests run: )\\d+' target/surefire-reports/index.html || echo "Tests: 0"
+                        else
+                            echo "Pas de rapport de tests"
+                        fi
+                    ''').trim()
 
-                echo "Tests résumé: ${testSummary}"
+                    echo "Tests résumé: ${testSummary}"
+                }
             }
         }
 
@@ -173,7 +178,9 @@ pipeline {
         }
 
         cleanup {
-            cleanWs()
+            node {
+                cleanWs()
+            }
         }
     }
 }
