@@ -17,14 +17,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo '🔨 Compilation du projet...'
-                sh './mvnw clean package -DskipTests'
+                sh 'chmod +x ./mvnw && ./mvnw clean package -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
                 echo '🧪 Exécution des tests...'
-                sh './mvnw test || true'
+                sh 'chmod +x ./mvnw && ./mvnw test || true'
             }
         }
 
